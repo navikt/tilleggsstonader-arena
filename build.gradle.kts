@@ -74,6 +74,7 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.8")
 
     testImplementation("org.testcontainers:oracle-xe:1.19.3")
+    testImplementation("com.h2database:h2")
 
     testImplementation("no.nav.security:token-validation-spring-test:$tokenSupportVersion")
     testImplementation("no.nav.tilleggsstonader-libs:test-util:$tilleggsstønaderLibsVersion")

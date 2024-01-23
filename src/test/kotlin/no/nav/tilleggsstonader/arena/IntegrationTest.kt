@@ -30,12 +30,9 @@ class DefaultRestTemplateConfiguration {
 }
 
 @ExtendWith(SpringExtension::class)
-// @ContextConfiguration(initializers = [DbContainerInitializer::class])
 @SpringBootTest(classes = [App::class], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles(
     "integrasjonstest",
-    "mock-pdl",
-    "mock-vedlegg",
 )
 @EnableMockOAuth2Server
 abstract class IntegrationTest {

@@ -41,7 +41,18 @@ spec:
   azure:
     application:
       enabled: true
+  vault:
+    enabled: true
+    paths:
+      - kvPath: /oracle/data/dev/creds/arena_q1-arena_tilgang_tst
+        mountPath: /var/run/secrets/oracle/creds
   env:
     - name: SPRING_PROFILES_ACTIVE
       value: dev
+    - name: DB_URL
+      value: jdbc:oracle:thin:@a01dbfl048.adeo.no:1521/areq01
+    - name: DB_USER_PATH
+      value: /var/run/secrets/oracle/creds/username
+    - name: DB_PASSWORD_PATH
+      value: /var/run/secrets/oracle/creds/password
 

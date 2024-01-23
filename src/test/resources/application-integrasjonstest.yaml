@@ -4,6 +4,14 @@ server:
 logging:
   config: classpath:logback-test.xml
 
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=Oracle
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+
+
 AZURE_APP_TENANT_ID: navq.onmicrosoft.com
 AZURE_OPENID_CONFIG_TOKEN_ENDPOINT: https://login.microsoftonline.com/${AZURE_APP_TENANT_ID}/oauth2/v2.0/token
 no.nav.security.jwt:
