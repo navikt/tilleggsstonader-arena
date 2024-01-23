@@ -20,3 +20,4 @@ no.nav.security.jwt:
       discovery-url: http://localhost:${mock-oauth2-server.port}/azuread/.well-known/openid-configuration
       accepted-audience: tilleggsstonader-app
       cookie_name: localhost-azuread
+      proxyurl: ~
