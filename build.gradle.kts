@@ -1,6 +1,6 @@
 val javaVersion = JavaLanguageVersion.of(21)
 val tilleggsstønaderLibsVersion = "2024.01.02-12.46.9d660ad18bf7"
-val tilleggsstønaderKontrakterVersion = "2023.12.18-10.13.7d6848ac9d82"
+val tilleggsstønaderKontrakterVersion = "2024.01.09-09.12.6e37e00e4ec2"
 val familieProsesseringVersion = "2.20231212093500_bfa0e7c"
 val tokenSupportVersion = "3.2.0"
 
@@ -10,16 +10,16 @@ version = "1.0.0"
 plugins {
     application
 
-    kotlin("jvm") version "1.9.22"
-    id("com.diffplug.spotless") version "6.23.3"
-    id("com.github.ben-manes.versions") version "0.50.0"
+    kotlin("jvm") version "2.0.0-Beta3"
+    id("com.diffplug.spotless") version "6.25.0"
+    id("com.github.ben-manes.versions") version "0.51.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
 
-    id("org.springframework.boot") version "3.2.1"
+    id("org.springframework.boot") version "3.2.2"
     id("io.spring.dependency-management") version "1.1.4"
-    kotlin("plugin.spring") version "1.9.22"
+    kotlin("plugin.spring") version "2.0.0-Beta3"
 
-    id("org.cyclonedx.bom") version "1.8.1"
+    id("org.cyclonedx.bom") version "1.8.2"
 }
 
 repositories {
@@ -71,7 +71,7 @@ dependencies {
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("io.mockk:mockk:1.13.9")
 
     testImplementation("com.h2database:h2")
 
