@@ -12,13 +12,12 @@ import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.jdbc.core.JdbcAggregateOperations
 import org.springframework.http.HttpHeaders
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.web.client.RestTemplate
 import java.util.UUID
-import kotlin.reflect.KClass
 
 // Slett denne når RestTemplateConfiguration er tatt i bruk?
 @Configuration
@@ -50,7 +49,10 @@ abstract class IntegrationTest {
     private lateinit var mockOAuth2Server: MockOAuth2Server
 
     @Autowired
-    private lateinit var jdbcAggregateOperations: JdbcAggregateOperations
+    private lateinit var jdbcTemplate: NamedParameterJdbcTemplate
+
+    @Autowired
+    protected lateinit var utilRepository: UtilRepository
 
     @AfterEach
     fun tearDown() {
@@ -59,7 +61,13 @@ abstract class IntegrationTest {
     }
 
     private fun resetDatabase() {
-        listOf<KClass<*>>().forEach { jdbcAggregateOperations.deleteAll(it.java) }
+        listOf("person", "saksforhold", " sak", "vedtak").forEach {
+            try {
+                jdbcTemplate.update("DELETE FROM $it", emptyMap<String, String>())
+            } catch (e: Exception) {
+                throw RuntimeException("Feilet sletting av $it", e)
+            }
+        }
     }
 
     protected fun localhost(path: String): String {
