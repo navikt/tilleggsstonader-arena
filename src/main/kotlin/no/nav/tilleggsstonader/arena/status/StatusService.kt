@@ -35,9 +35,8 @@ class StatusService(
     }
 
     private fun hentSakstatus(request: IdenterStønadstype): SakStatus {
-        val sak = sakRepository.hentSaker(request.identer)
         return SakStatus(
-            harSakSomIkkeErKobletVedtak = false, // TODO
+            harAktivSakUtenVedtak = sakRepository.harAktiveSakerUtenVedtak(request.identer),
         )
     }
 }
