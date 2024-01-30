@@ -18,6 +18,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
     banner-mode: "off"
+  data.jdbc.repositories.enabled: true
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}

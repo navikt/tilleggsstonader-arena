@@ -53,7 +53,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
-    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("com.oracle.database.jdbc:ojdbc8:23.3.0.23.09")
 
     // Logging
