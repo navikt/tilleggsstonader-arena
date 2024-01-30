@@ -17,7 +17,7 @@ plugins {
 
     id("org.springframework.boot") version "3.2.2"
     id("io.spring.dependency-management") version "1.1.4"
-    kotlin("plugin.spring") version "2.0.0-Beta3"
+    kotlin("plugin.spring") version "1.9.22"
 
     id("org.cyclonedx.bom") version "1.8.2"
 }
@@ -25,7 +25,6 @@ plugins {
 repositories {
     mavenCentral()
     mavenLocal()
-    maven("https://jitpack.io")
 
     maven {
         url = uri("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
