@@ -38,6 +38,7 @@ spec:
     inbound:
       rules:
         - application: tilleggsstonader-sak
+          cluster: prod-gcp
   azure:
     application:
       enabled: true
