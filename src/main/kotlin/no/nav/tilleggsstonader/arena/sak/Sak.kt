@@ -1,10 +1,9 @@
 package no.nav.tilleggsstonader.arena.sak
 
-import no.nav.tilleggsstonader.arena.felles.Arenakode
+import no.nav.tilleggsstonader.arena.felles.KodeArena
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Embedded
-import org.springframework.data.relational.core.mapping.MappedCollection
 import java.time.LocalDate
 
 data class Sak(
@@ -39,7 +38,7 @@ data class Saksforhold(
     fun erBrukerregistrert() = kilde == "BRUKERREGISTRERT"
 }
 
-enum class Målgruppe(override val kodeArena: String, val navn: String): Arenakode {
+enum class Målgruppe(override val kodeArena: String, val navn: String): KodeArena {
     ARBEIDSSØKER("ARBSOKERE", "Arbeidssøker"),
     ENSLIG_FORSØRGER_SØKER_ARBEID("ENSFORARBS", "Enslig forsørger som søker arbeid"),
     ENSLIG_FORSØRGER_UTDANNING("ENSFORUTD", "Enslig forsørger under utdanning"),
@@ -51,7 +50,7 @@ enum class Målgruppe(override val kodeArena: String, val navn: String): Arenako
     TIDLIGERE_FAMILIEPLEIER_UTDANNING("TIDLFAMPL", "Tidligere familiepleier under utdanning"),
 }
 
-enum class StatusSak(override val kodeArena: String, val navn: String): Arenakode {
+enum class StatusSak(override val kodeArena: String, val navn: String): KodeArena {
     AKTIV("AKTIV", "Aktiv"),
     LUKKET("AVSLU", "Lukket"),
     HISTORISERT("HIST", "Historisert"),

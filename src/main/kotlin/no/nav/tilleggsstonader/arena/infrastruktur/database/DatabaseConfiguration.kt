@@ -1,6 +1,6 @@
 package no.nav.tilleggsstonader.arena.infrastruktur.database
 
-import no.nav.tilleggsstonader.arena.felles.Arenakode
+import no.nav.tilleggsstonader.arena.felles.KodeArena
 import no.nav.tilleggsstonader.arena.sak.Målgruppe
 import no.nav.tilleggsstonader.arena.sak.StatusSak
 import no.nav.tilleggsstonader.arena.vedtak.Rettighet
@@ -15,7 +15,6 @@ import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories
 import org.springframework.jdbc.datasource.DataSourceTransactionManager
 import org.springframework.transaction.PlatformTransactionManager
-import java.awt.geom.Area
 import javax.sql.DataSource
 import kotlin.reflect.KClass
 
@@ -43,7 +42,7 @@ class DatabaseConfiguration : AbstractJdbcConfiguration() {
 }
 
 @ReadingConverter
-abstract class EnumConverter<T>(clazz: KClass<T>) : Converter<String, T> where T : Enum<T>, T : Arenakode {
+abstract class EnumConverter<T>(clazz: KClass<T>) : Converter<String, T> where T : Enum<T>, T : KodeArena {
 
     private val arenaKoder = clazz.java.enumConstants.associateBy { it.kodeArena }
     override fun convert(verdi: String): T {

@@ -1,5 +1,5 @@
 package no.nav.tilleggsstonader.arena.felles
 
-interface Arenakode {
+interface KodeArena {
     val kodeArena: String
 }

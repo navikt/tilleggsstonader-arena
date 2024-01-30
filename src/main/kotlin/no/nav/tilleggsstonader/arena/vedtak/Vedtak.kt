@@ -1,6 +1,6 @@
 package no.nav.tilleggsstonader.arena.vedtak
 
-import no.nav.tilleggsstonader.arena.felles.Arenakode
+import no.nav.tilleggsstonader.arena.felles.KodeArena
 import no.nav.tilleggsstonader.kontrakter.felles.Stønadstype
 import org.springframework.data.relational.core.mapping.Column
 import java.time.LocalDate
@@ -47,7 +47,7 @@ enum class UtfallVedtak {
     AVBRUTT,
 }
 
-enum class StatusVedtak(override val kodeArena: String, val navn: String) : Arenakode {
+enum class StatusVedtak(override val kodeArena: String, val navn: String) : KodeArena {
     GODKJENT("GODKJ", "Godkjent"),
     REGISTRERT("REGIS", "Registrert"),
     OPPRETTET("OPPRE", "Opprettet"),
@@ -57,13 +57,13 @@ enum class StatusVedtak(override val kodeArena: String, val navn: String) : Aren
     MOTTATT("MOTAT", "Mottatt"),
 }
 
-enum class TypeVedtak(override val kodeArena: String, val navn: String) : Arenakode {
+enum class TypeVedtak(override val kodeArena: String, val navn: String) : KodeArena {
     ENDRING("E", "Endring"),
     NY_RETTIGHET("O", "Ny rettighet"),
     STANS("S", "Stans"),
 }
 
-enum class Rettighet(override val kodeArena: String, val navn: String) : Arenakode {
+enum class Rettighet(override val kodeArena: String, val navn: String) : KodeArena {
     BOUTGIFTER_ARBEIDSSØKERE("TSRBOUTG", "Boutgifter arbeidssøkere"),
     BOUTGIFTER("TSOBOUTG", "Boutgifter tilleggsstønad"),
     DAGLIG_REISE_ARBEIDSSØKERE("TSRDAGREIS", "Daglig reise arbeidssøkere"),
