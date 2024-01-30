@@ -85,7 +85,6 @@ enum class Rettighet(override val kodeArena: String, val navn: String) : KodeAre
     TILSYN_BARN("TSOTILBARN", "Tilsyn av barn tilleggsstønad"),
     TILSYN_FAMILIEMEDLEMMER_ARBEIDSSSØKERE("TSRTILFAM", "Tilsyn av familiemedlemmer arbeidssøkere"),
     TILSYN_FAMILIEMEDLEMMER("TSOTILFAM", "Tilsyn av familiemedlemmer tilleggsstønad"),
-    ;
 }
 
 fun Stønadstype.rettigheter(): List<String> = when (this) {

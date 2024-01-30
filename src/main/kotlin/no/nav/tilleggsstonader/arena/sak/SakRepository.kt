@@ -5,9 +5,10 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface SakRepository: CrudRepository<Sak, Int> {
+interface SakRepository : CrudRepository<Sak, Int> {
 
-    @Query("""
+    @Query(
+        """
     SELECT 
      s.sak_id,p.person_id,
      s.reg_dato,s.reg_user,s.mod_dato,s.mod_user,s.dato_avsluttet,
@@ -17,10 +18,12 @@ interface SakRepository: CrudRepository<Sak, Int> {
       JOIN person p ON p.person_id = s.objekt_id
       LEFT JOIN saksforhold sf ON sf.sak_id = s.sak_id
     WHERE p.fodselsnr IN (:identer)
-    """)
+    """,
+    )
     fun finnSaker(identer: Collection<String>): List<Sak>
 
-    @Query("""
+    @Query(
+        """
     SELECT 
      count(*)
     FROM sak s
@@ -29,9 +32,9 @@ interface SakRepository: CrudRepository<Sak, Int> {
     WHERE p.fodselsnr IN (:identer)
       AND v.vedtak_id is null
       AND s.sakstatuskode IN (:status) 
-    """)
+    """,
+    )
     fun antallSakerUtenVedtak(identer: Collection<String>, status: Collection<String>): Int
-
 }
 
 val SAK_AKTIVE_STATUSER = setOf(StatusSak.AKTIV, StatusSak.OPPRETTET).map { it.kodeArena }

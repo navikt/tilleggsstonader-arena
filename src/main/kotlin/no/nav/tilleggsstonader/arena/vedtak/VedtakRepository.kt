@@ -19,7 +19,7 @@ interface VedtakRepository : CrudRepository<Vedtak, Int> {
       JOIN person p ON p.person_id = v.person_id
     WHERE p.fodselsnr IN (:identer)
       AND v.rettighetkode IN (:rettigheter)
-    """
+    """,
     )
     fun finnVedtak(identer: Set<String>, rettigheter: Collection<String>): List<Vedtak>
 }

@@ -36,7 +36,7 @@ class DatabaseConfiguration : AbstractJdbcConfiguration() {
                 StatusVedtakConverter(),
                 TypeVedtakConverter(),
                 RettighetConverter(),
-            )
+            ),
         )
     }
 }
