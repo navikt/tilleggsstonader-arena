@@ -1,6 +1,6 @@
 val javaVersion = JavaLanguageVersion.of(21)
 val tilleggsstønaderLibsVersion = "2024.01.02-12.46.9d660ad18bf7"
-val tilleggsstønaderKontrakterVersion = "2024.01.09-09.12.6e37e00e4ec2"
+val tilleggsstønaderKontrakterVersion = "2024.01.29-19.59.4aed80cc3b37"
 val familieProsesseringVersion = "2.20231212093500_bfa0e7c"
 val tokenSupportVersion = "3.2.0"
 
@@ -72,6 +72,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.mockk:mockk:1.13.9")
 
+    testImplementation("org.flywaydb:flyway-core")
     testImplementation("com.h2database:h2")
 
     testImplementation("no.nav.security:token-validation-spring-test:$tokenSupportVersion")

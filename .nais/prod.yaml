@@ -37,7 +37,7 @@ spec:
   accessPolicy:
     inbound:
       rules:
-        - application: tilleggsstonader-soknad-api
+        - application: tilleggsstonader-sak
   azure:
     application:
       enabled: true
