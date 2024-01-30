@@ -1,8 +1,10 @@
 package no.nav.tilleggsstonader.arena.status
 
+import no.nav.tilleggsstonader.arena.sak.SAK_AKTIVE_STATUSER
 import no.nav.tilleggsstonader.arena.sak.SakRepository
 import no.nav.tilleggsstonader.arena.vedtak.UtfallVedtak
 import no.nav.tilleggsstonader.arena.vedtak.VedtakRepository
+import no.nav.tilleggsstonader.arena.vedtak.rettigheter
 import no.nav.tilleggsstonader.kontrakter.arena.ArenaStatusDto
 import no.nav.tilleggsstonader.kontrakter.arena.SakStatus
 import no.nav.tilleggsstonader.kontrakter.arena.VedtakStatus
@@ -24,7 +26,7 @@ class StatusService(
     }
 
     private fun hentVedtakstatus(request: IdenterStønadstype): VedtakStatus {
-        val vedtak = vedtakRepository.hentVedtak(request.identer, request.stønadstype)
+        val vedtak = vedtakRepository.finnVedtak(request.identer, request.stønadstype.rettigheter())
         return VedtakStatus(
             harVedtak = vedtak.isNotEmpty(),
             harAktivtVedtak = vedtak
@@ -36,7 +38,11 @@ class StatusService(
 
     private fun hentSakstatus(request: IdenterStønadstype): SakStatus {
         return SakStatus(
-            harAktivSakUtenVedtak = sakRepository.harAktiveSakerUtenVedtak(request.identer),
+            harAktivSakUtenVedtak = harAktivSakUtenVedtak(request),
         )
+    }
+
+    private fun harAktivSakUtenVedtak(request: IdenterStønadstype): Boolean {
+        return sakRepository.antallSakerUtenVedtak(request.identer, SAK_AKTIVE_STATUSER) > 0
     }
 }

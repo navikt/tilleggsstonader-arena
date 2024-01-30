@@ -101,7 +101,7 @@ class UtilRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) {
         """,
             mapOf(
                 "personId" to 1,
-                "status" to status.kode,
+                "status" to status.kodeArena,
             ),
         )
     }

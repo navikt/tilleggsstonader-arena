@@ -19,7 +19,7 @@ class VedtakRepositoryTest : IntegrationTest() {
         utilRepository.lagSak()
         utilRepository.lagVedtak()
 
-        val vedtak = vedtakRepository.hentVedtak(setOf(FNR), Stønadstype.BARNETILSYN).single()
+        val vedtak = vedtakRepository.finnVedtak(setOf(FNR), Stønadstype.BARNETILSYN.rettigheter()).single()
 
         assertThat(vedtak.vedtakId).isEqualTo(400)
         assertThat(vedtak.sakId).isEqualTo(100)
@@ -36,7 +36,7 @@ class VedtakRepositoryTest : IntegrationTest() {
         assertThat(vedtak.personId).isEqualTo(1)
         assertThat(vedtak.brukerIdBeslutter).isEqualTo("AA1234")
         assertThat(vedtak.datoInnstilt).isEqualTo(LocalDate.of(2022, 2, 26))
-        assertThat(vedtak.erUtland).isFalse()
+        assertThat(vedtak.erUtland).isEqualTo("N")
         assertThat(vedtak.fom).isEqualTo(LocalDate.of(2023, 1, 19))
         assertThat(vedtak.tom).isEqualTo(LocalDate.of(2023, 6, 4))
         assertThat(vedtak.totalbeløp).isEqualTo(20130)

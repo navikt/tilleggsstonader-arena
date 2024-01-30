@@ -1,29 +1,45 @@
 package no.nav.tilleggsstonader.arena.vedtak
 
+import no.nav.tilleggsstonader.arena.felles.Arenakode
 import no.nav.tilleggsstonader.kontrakter.felles.Stønadstype
+import org.springframework.data.relational.core.mapping.Column
 import java.time.LocalDate
 
 data class Vedtak(
     val vedtakId: Int,
     val sakId: Int,
+    @Column("vedtakstatuskode")
     val vedtakstatus: StatusVedtak,
+    @Column("vedtaktypekode")
     val vedtaktype: TypeVedtak,
+    @Column("reg_dato")
     val registrertDato: LocalDate,
+    @Column("reg_user")
     val registrertAv: String,
+    @Column("mod_dato")
     val modifisertDato: LocalDate,
+    @Column("mod_user")
     val modifisertAv: String,
+    @Column("utfallkode")
     val utfall: UtfallVedtak?,
+    @Column("rettighetkode")
     val rettighet: Rettighet,
     val datoMottatt: LocalDate,
     val vedtakIdRelatert: Int?,
     val personId: Int,
+    @Column("brukerid_beslutter")
     val brukerIdBeslutter: String?,
     val datoInnstilt: LocalDate?,
-    val erUtland: Boolean,
+    val erUtland: String,
+    @Column("fra_dato")
     val fom: LocalDate?,
+    @Column("til_dato")
     val tom: LocalDate?,
+    @Column("totalbelop")
     val totalbeløp: Int?,
-)
+) {
+    fun gjelderUtland() = erUtland == "J"
+}
 
 enum class UtfallVedtak {
     NEI,
@@ -31,7 +47,7 @@ enum class UtfallVedtak {
     AVBRUTT,
 }
 
-enum class StatusVedtak(val kode: String, val navn: String) {
+enum class StatusVedtak(override val kodeArena: String, val navn: String) : Arenakode {
     GODKJENT("GODKJ", "Godkjent"),
     REGISTRERT("REGIS", "Registrert"),
     OPPRETTET("OPPRE", "Opprettet"),
@@ -39,29 +55,15 @@ enum class StatusVedtak(val kode: String, val navn: String) {
     INNSTILT("INNST", "Innstilt"),
     IVERKSATT("IVERK", "Iverksatt"),
     MOTTATT("MOTAT", "Mottatt"),
-    ;
-
-    companion object {
-        val values = StatusVedtak.entries.associateBy { it.kode }
-
-        fun fraKode(kode: String) = values[kode] ?: error("Finner ikke ${this::class.simpleName}.$kode")
-    }
 }
 
-enum class TypeVedtak(val kode: String, val navn: String) {
+enum class TypeVedtak(override val kodeArena: String, val navn: String) : Arenakode {
     ENDRING("E", "Endring"),
     NY_RETTIGHET("O", "Ny rettighet"),
     STANS("S", "Stans"),
-    ;
-
-    companion object {
-        val values = TypeVedtak.entries.associateBy { it.kode }
-
-        fun fraKode(kode: String) = values[kode] ?: error("Finner ikke ${this::class.simpleName}.$kode")
-    }
 }
 
-enum class Rettighet(val kode: String, val navn: String) {
+enum class Rettighet(override val kodeArena: String, val navn: String) : Arenakode {
     BOUTGIFTER_ARBEIDSSØKERE("TSRBOUTG", "Boutgifter arbeidssøkere"),
     BOUTGIFTER("TSOBOUTG", "Boutgifter tilleggsstønad"),
     DAGLIG_REISE_ARBEIDSSØKERE("TSRDAGREIS", "Daglig reise arbeidssøkere"),
@@ -84,14 +86,8 @@ enum class Rettighet(val kode: String, val navn: String) {
     TILSYN_FAMILIEMEDLEMMER_ARBEIDSSSØKERE("TSRTILFAM", "Tilsyn av familiemedlemmer arbeidssøkere"),
     TILSYN_FAMILIEMEDLEMMER("TSOTILFAM", "Tilsyn av familiemedlemmer tilleggsstønad"),
     ;
-
-    companion object {
-        val values = Rettighet.entries.associateBy { it.kode }
-
-        fun fraKode(kode: String) = values[kode] ?: error("Finner ikke ${this::class.simpleName}.$kode")
-    }
 }
 
-fun Stønadstype.rettigheter(): Set<Rettighet> = when (this) {
-    Stønadstype.BARNETILSYN -> setOf(Rettighet.TILSYN_BARN, Rettighet.TILSYN_BARN_ARBEIDSSSØKERE)
+fun Stønadstype.rettigheter(): List<String> = when (this) {
+    Stønadstype.BARNETILSYN -> setOf(Rettighet.TILSYN_BARN, Rettighet.TILSYN_BARN_ARBEIDSSSØKERE).map { it.kodeArena }
 }

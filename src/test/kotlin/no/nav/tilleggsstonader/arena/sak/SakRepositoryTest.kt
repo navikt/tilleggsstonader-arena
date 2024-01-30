@@ -16,9 +16,9 @@ class SakRepositoryTest : IntegrationTest() {
     @Test
     fun `skal kunne hente ut saker uten saksforhold`() {
         utilRepository.lagPerson()
-        utilRepository.lagSak()
+        utilRepository.lagSak(StatusSak.LUKKET)
 
-        val sak = sakRepository.hentSaker(setOf(FNR)).single()
+        val sak = sakRepository.finnSaker(setOf(FNR)).single()
 
         assertThat(sak.sakId).isEqualTo(100)
         assertThat(sak.personId).isEqualTo(1)
@@ -27,7 +27,7 @@ class SakRepositoryTest : IntegrationTest() {
         assertThat(sak.modifisertDato).isEqualTo(LocalDate.of(2021, 2, 20))
         assertThat(sak.modifisertAv).isEqualTo("GRENSESN")
         assertThat(sak.datoAvsluttet).isNull()
-        assertThat(sak.status).isEqualTo(StatusSak.AKTIV)
+        assertThat(sak.status).isEqualTo(StatusSak.LUKKET)
         assertThat(sak.statusEndret).isEqualTo(LocalDate.of(2022, 2, 20))
 
         assertThat(sak.saksforhold).isNull()
@@ -39,7 +39,7 @@ class SakRepositoryTest : IntegrationTest() {
         utilRepository.lagSak()
         utilRepository.lagSaksforhold()
 
-        val sak = sakRepository.hentSaker(setOf(FNR)).single()
+        val sak = sakRepository.finnSaker(setOf(FNR)).single()
 
         assertThat(sak.saksforhold).isNotNull()
         assertThat(sak.saksforhold!!.målgruppe).isEqualTo(Målgruppe.NEDSATT__ARBEIDSEVNE)
@@ -50,14 +50,15 @@ class SakRepositoryTest : IntegrationTest() {
     }
 
     @Nested
-    inner class HarSakerUtenVedtak {
+    inner class AntallSakerUtenVedtak {
 
         @Test
         fun `har sak uten vedtak`() {
             utilRepository.lagPerson()
             utilRepository.lagSak()
 
-            assertThat(sakRepository.harAktiveSakerUtenVedtak(setOf(FNR))).isTrue()
+            assertThat(sakRepository.antallSakerUtenVedtak(setOf(FNR), SAK_AKTIVE_STATUSER))
+                .isEqualTo(1)
         }
 
         @Test
@@ -65,7 +66,8 @@ class SakRepositoryTest : IntegrationTest() {
             utilRepository.lagPerson()
             utilRepository.lagSak(status = StatusSak.INAKTIV)
 
-            assertThat(sakRepository.harAktiveSakerUtenVedtak(setOf(FNR))).isFalse()
+            assertThat(sakRepository.antallSakerUtenVedtak(setOf(FNR), SAK_AKTIVE_STATUSER))
+                .isEqualTo(0)
         }
 
         @Test
@@ -74,7 +76,8 @@ class SakRepositoryTest : IntegrationTest() {
             utilRepository.lagSak()
             utilRepository.lagVedtak()
 
-            assertThat(sakRepository.harAktiveSakerUtenVedtak(setOf(FNR))).isFalse()
+            assertThat(sakRepository.antallSakerUtenVedtak(setOf(FNR), SAK_AKTIVE_STATUSER))
+                .isEqualTo(0)
         }
     }
 }
