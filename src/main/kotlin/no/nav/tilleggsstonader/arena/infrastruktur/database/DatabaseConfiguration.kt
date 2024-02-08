@@ -1,11 +1,11 @@
 package no.nav.tilleggsstonader.arena.infrastruktur.database
 
-import no.nav.tilleggsstonader.arena.felles.KodeArena
-import no.nav.tilleggsstonader.arena.sak.Målgruppe
-import no.nav.tilleggsstonader.arena.sak.StatusSak
-import no.nav.tilleggsstonader.arena.vedtak.Rettighet
-import no.nav.tilleggsstonader.arena.vedtak.StatusVedtak
-import no.nav.tilleggsstonader.arena.vedtak.TypeVedtak
+import no.nav.tilleggsstonader.kontrakter.arena.KodeArena
+import no.nav.tilleggsstonader.kontrakter.arena.sak.Målgruppe
+import no.nav.tilleggsstonader.kontrakter.arena.sak.StatusSak
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.Rettighet
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.StatusVedtak
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.TypeVedtak
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.convert.converter.Converter

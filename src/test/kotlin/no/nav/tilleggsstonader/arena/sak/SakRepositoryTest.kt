@@ -2,6 +2,8 @@ package no.nav.tilleggsstonader.arena.sak
 
 import no.nav.tilleggsstonader.arena.IntegrationTest
 import no.nav.tilleggsstonader.arena.TestConstants.FNR
+import no.nav.tilleggsstonader.kontrakter.arena.sak.Målgruppe
+import no.nav.tilleggsstonader.kontrakter.arena.sak.StatusSak
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test

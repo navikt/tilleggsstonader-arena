@@ -2,6 +2,10 @@ package no.nav.tilleggsstonader.arena.vedtak
 
 import no.nav.tilleggsstonader.arena.IntegrationTest
 import no.nav.tilleggsstonader.arena.TestConstants.FNR
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.Rettighet
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.StatusVedtak
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.TypeVedtak
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.UtfallVedtak
 import no.nav.tilleggsstonader.kontrakter.felles.Stønadstype
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

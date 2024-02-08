@@ -1,5 +1,6 @@
 package no.nav.tilleggsstonader.arena.sak
 
+import no.nav.tilleggsstonader.kontrakter.arena.sak.StatusSak
 import org.springframework.data.jdbc.repository.query.Query
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
