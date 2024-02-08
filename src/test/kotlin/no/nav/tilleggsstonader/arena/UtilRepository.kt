@@ -1,6 +1,6 @@
 package no.nav.tilleggsstonader.arena
 
-import no.nav.tilleggsstonader.arena.sak.StatusSak
+import no.nav.tilleggsstonader.kontrakter.arena.sak.StatusSak
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
 

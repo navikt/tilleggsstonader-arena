@@ -2,12 +2,12 @@ package no.nav.tilleggsstonader.arena.status
 
 import no.nav.tilleggsstonader.arena.sak.SAK_AKTIVE_STATUSER
 import no.nav.tilleggsstonader.arena.sak.SakRepository
-import no.nav.tilleggsstonader.arena.vedtak.UtfallVedtak
 import no.nav.tilleggsstonader.arena.vedtak.VedtakRepository
 import no.nav.tilleggsstonader.arena.vedtak.rettigheter
 import no.nav.tilleggsstonader.kontrakter.arena.ArenaStatusDto
 import no.nav.tilleggsstonader.kontrakter.arena.SakStatus
 import no.nav.tilleggsstonader.kontrakter.arena.VedtakStatus
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.UtfallVedtak
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterStønadstype
 import org.springframework.stereotype.Service
 import java.time.LocalDate
