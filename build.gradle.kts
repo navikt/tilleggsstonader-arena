@@ -1,8 +1,8 @@
 val javaVersion = JavaLanguageVersion.of(21)
-val tilleggsstønaderLibsVersion = "2024.01.02-12.46.9d660ad18bf7"
+val tilleggsstønaderLibsVersion = "2024.01.31-13.14.525870bbcf52"
 val tilleggsstønaderKontrakterVersion = "2024.02.07-10.15.07cb3f3164e4"
 val familieProsesseringVersion = "2.20231212093500_bfa0e7c"
-val tokenSupportVersion = "3.2.0"
+val tokenSupportVersion = "4.1.3"
 
 group = "no.nav.tilleggsstonader.arena"
 version = "1.0.0"
