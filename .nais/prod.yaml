@@ -51,7 +51,7 @@ spec:
     - name: SPRING_PROFILES_ACTIVE
       value: prod
     - name: DB_URL
-      value: jdbc:oracle:thin:@a01dbfl048.adeo.no:1521/areq01 # TODO
+      value: jdbc:oracle:thin:@a01dbfl049.adeo.no:1521/arenap
     - name: DB_USER_PATH
       value: /var/run/secrets/oracle/creds/username
     - name: DB_PASSWORD_PATH
