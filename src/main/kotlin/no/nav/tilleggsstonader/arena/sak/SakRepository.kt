@@ -11,6 +11,17 @@ interface SakRepository : CrudRepository<Sak, Int> {
     @Query(
         """
     SELECT 
+     count(*) antall
+    FROM sak s
+      JOIN person p ON p.person_id = s.objekt_id
+    WHERE p.fodselsnr IN (:identer)
+    """,
+    )
+    fun antallSaker(identer: Collection<String>): Int
+
+    @Query(
+        """
+    SELECT 
      s.sak_id,p.person_id,
      s.reg_dato,s.reg_user,s.mod_dato,s.mod_user,s.dato_avsluttet,
      s.sakstatuskode,s.status_endret,
