@@ -23,7 +23,7 @@ class StatusController(
     }
 
     @PostMapping("har-saker")
-    fun hentStatus(@RequestBody request: IdenterRequest): ArenaStatusHarSakerDto {
+    fun harSaker(@RequestBody request: IdenterRequest): ArenaStatusHarSakerDto {
         return statusService.harSaker(request)
     }
 }
