@@ -2,6 +2,8 @@ package no.nav.tilleggsstonader.arena.status
 
 import no.nav.security.token.support.core.api.ProtectedWithClaims
 import no.nav.tilleggsstonader.kontrakter.arena.ArenaStatusDto
+import no.nav.tilleggsstonader.kontrakter.arena.ArenaStatusHarSakerDto
+import no.nav.tilleggsstonader.kontrakter.felles.IdenterRequest
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterStønadstype
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -18,5 +20,10 @@ class StatusController(
     @PostMapping
     fun hentStatus(@RequestBody request: IdenterStønadstype): ArenaStatusDto {
         return statusService.hentStatus(request)
+    }
+
+    @PostMapping("har-saker")
+    fun harSaker(@RequestBody request: IdenterRequest): ArenaStatusHarSakerDto {
+        return statusService.harSaker(request)
     }
 }

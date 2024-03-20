@@ -5,9 +5,11 @@ import no.nav.tilleggsstonader.arena.sak.SakRepository
 import no.nav.tilleggsstonader.arena.vedtak.VedtakRepository
 import no.nav.tilleggsstonader.arena.vedtak.rettigheter
 import no.nav.tilleggsstonader.kontrakter.arena.ArenaStatusDto
+import no.nav.tilleggsstonader.kontrakter.arena.ArenaStatusHarSakerDto
 import no.nav.tilleggsstonader.kontrakter.arena.SakStatus
 import no.nav.tilleggsstonader.kontrakter.arena.VedtakStatus
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.UtfallVedtak
+import no.nav.tilleggsstonader.kontrakter.felles.IdenterRequest
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterStønadstype
 import org.springframework.stereotype.Service
 import java.time.LocalDate
@@ -17,6 +19,10 @@ class StatusService(
     private val vedtakRepository: VedtakRepository,
     private val sakRepository: SakRepository,
 ) {
+
+    fun harSaker(request: IdenterRequest): ArenaStatusHarSakerDto {
+        return ArenaStatusHarSakerDto(sakRepository.antallSaker(request.identer) > 0)
+    }
 
     fun hentStatus(request: IdenterStønadstype): ArenaStatusDto {
         return ArenaStatusDto(
@@ -31,8 +37,7 @@ class StatusService(
             harVedtak = vedtak.isNotEmpty(),
             harAktivtVedtak = vedtak
                 .filter { it.utfall == UtfallVedtak.JA }
-                .filter { it.tom != null && it.tom > LocalDate.now() }
-                .any(),
+                .any { it.tom != null && it.tom > LocalDate.now() },
         )
     }
 

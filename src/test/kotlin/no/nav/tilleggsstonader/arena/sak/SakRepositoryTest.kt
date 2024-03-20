@@ -52,6 +52,23 @@ class SakRepositoryTest : IntegrationTest() {
     }
 
     @Nested
+    inner class HarSaker {
+
+        @Test
+        fun `har sak`() {
+            utilRepository.lagPerson()
+            utilRepository.lagSak()
+
+            assertThat(sakRepository.antallSaker(setOf(FNR))).isEqualTo(1)
+        }
+
+        @Test
+        fun `har ikke sak`() {
+            assertThat(sakRepository.antallSaker(setOf(FNR))).isEqualTo(0)
+        }
+    }
+
+    @Nested
     inner class AntallSakerUtenVedtak {
 
         @Test
