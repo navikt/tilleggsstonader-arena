@@ -11,8 +11,8 @@ import no.nav.tilleggsstonader.kontrakter.arena.VedtakStatus
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.UtfallVedtak
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterRequest
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterStønadstype
+import no.nav.tilleggsstonader.libs.utils.osloDateNow
 import org.springframework.stereotype.Service
-import java.time.LocalDate
 
 @Service
 class StatusService(
@@ -37,7 +37,7 @@ class StatusService(
             harVedtak = vedtak.isNotEmpty(),
             harAktivtVedtak = vedtak
                 .filter { it.utfall == UtfallVedtak.JA }
-                .any { it.tom != null && it.tom > LocalDate.now() },
+                .any { it.tom != null && it.tom > osloDateNow() },
         )
     }
 
