@@ -38,6 +38,7 @@ class StatusService(
             harAktivtVedtak = vedtak
                 .filter { it.utfall == UtfallVedtak.JA }
                 .any { it.tom != null && it.tom > osloDateNow() },
+            harVedtakUtenUtfall = vedtak.any { it.utfall == null },
         )
     }
 
