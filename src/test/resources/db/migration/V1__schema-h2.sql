@@ -127,3 +127,8 @@ CREATE TABLE vedtak
     AAR                    NUMBER(4)
 );
 
+CREATE TABLE taskinstance
+(
+    casecontext VARCHAR(50) NOT NULL
+);
+

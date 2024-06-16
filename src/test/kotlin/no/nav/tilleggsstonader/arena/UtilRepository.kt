@@ -195,4 +195,15 @@ values (:vedtakId,
             ),
         )
     }
+
+    fun lagOppgave(ident: String) {
+        jdbcTemplate.update("""
+            INSERT INTO taskinstance (casecontext)
+            VALUES (
+            :ident
+            )
+        """,
+            mapOf("ident" to ident)
+        )
+    }
 }
