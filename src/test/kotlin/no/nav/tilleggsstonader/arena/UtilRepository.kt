@@ -129,7 +129,7 @@ class UtilRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) {
 
         """,
             mapOf(
-                "sakId" to 100,
+                "sakId" to "100",
                 "personId" to 1,
             ),
         )
@@ -194,5 +194,47 @@ values (:vedtakId,
                 "personId" to 1,
             ),
         )
+    }
+
+    /**
+     * Oppretter en oppgave
+     */
+    fun opprettTaskInstance(medSakId: Boolean = true) {
+        val mainProcessId = 456
+        val sakId = "100"
+        jdbcTemplate.update(
+            """            
+                INSERT INTO taskinstance (ID,DESCRIPTION,NOTE,DUEDATE,MAINPROCESS_ID,CASECONTEXT,USERNAME,REG_DATO) VALUES 
+            (300,
+            'tittel',
+            'kommentar',
+            to_date('21.02.2023','DD.MM.RRRR'),
+            :mainProcessId,
+            'TS:' || :fnr,
+            '4462',
+            to_date('20.02.2022T19:01','DD.MM.RRRRTHH24:MI')
+            );
+        """,
+            mapOf(
+                "fnr" to TestConstants.FNR,
+                "mainProcessId" to mainProcessId,
+            ),
+        )
+        if (medSakId) {
+            jdbcTemplate.update(
+                """          
+                INSERT INTO variablebinding (INSTANCEELEMENTID, VARIABLENAME, STOREDOBJECTTYPE, STOREDOBJECT) VALUES 
+            (:instanceElementId,
+            'caseContext',
+            'a.domain.Sak',
+            :sakId
+            );
+        """,
+                mapOf(
+                    "instanceElementId" to mainProcessId,
+                    "sakId" to sakId,
+                ),
+            )
+        }
     }
 }
