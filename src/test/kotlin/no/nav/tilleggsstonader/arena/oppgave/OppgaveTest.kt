@@ -13,6 +13,7 @@ class OppgaveTest {
     @Test
     fun `skal mappe felter`() {
         val oppgave = ArenaOppgaveDto(
+            id = 300,
             tittel = "tittel",
             kommentar = "kommentar",
             fristFerdigstillelse = LocalDate.of(2024, 1, 3),
@@ -43,6 +44,7 @@ class OppgaveTest {
     }
 
     private fun oppgave(
+        id: Long = 300,
         tittel: String = "tittel",
         kommentar: String = "kommentar",
         fristFerdigstillelse: LocalDate = LocalDate.of(2024, 1, 3),
@@ -50,6 +52,7 @@ class OppgaveTest {
         opprettetTidspunkt: LocalDateTime = LocalDate.of(2024, 1, 3).atTime(10, 45),
         målgruppe: Målgruppe? = Målgruppe.NEDSATT__ARBEIDSEVNE,
     ) = Oppgave(
+        id = id,
         tittel = tittel,
         kommentar = kommentar,
         fristFerdigstillelse = fristFerdigstillelse,

@@ -12,7 +12,7 @@ interface OppgaveRepository : org.springframework.data.repository.Repository<Opp
     @Query(
         """
         SELECT 
-        t.description tittel, t.note kommentar, t.duedate frist_ferdigstillelse, 
+        t.id, t.description tittel, t.note kommentar, t.duedate frist_ferdigstillelse, 
         t.username benk, t.reg_dato opprettet_tidspunkt,
         sf.maalgruppekode maalgruppe
         FROM taskinstance t

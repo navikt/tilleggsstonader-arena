@@ -18,6 +18,7 @@ import java.time.LocalDateTime
  * @param målgruppe eksisterer ikke på alle type oppgaver. Finnes blant annet på søknader som blitt automatisk journalførte
  */
 data class Oppgave(
+    val id: Long,
     val tittel: String,
     val kommentar: String,
     val fristFerdigstillelse: LocalDate,
@@ -34,6 +35,7 @@ data class Oppgave(
 fun Oppgave.tilOppgaveArena(): ArenaOppgaveDto {
     val navnBenk = mapNavnBenk(benk)
     return ArenaOppgaveDto(
+        id = id,
         tittel = tittel,
         kommentar = kommentar,
         fristFerdigstillelse = fristFerdigstillelse,

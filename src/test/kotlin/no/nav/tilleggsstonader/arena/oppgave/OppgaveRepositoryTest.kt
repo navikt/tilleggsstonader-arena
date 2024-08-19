@@ -41,6 +41,7 @@ class OppgaveRepositoryTest : IntegrationTest() {
     }
 
     private fun Oppgave.assertOppgaveFelter(målgruppeMedVerdi: Boolean = true) {
+        assertThat(id).isEqualTo(300)
         assertThat(tittel).isEqualTo("tittel")
         assertThat(kommentar).isEqualTo("kommentar")
         assertThat(fristFerdigstillelse).isEqualTo(LocalDate.of(2023, 2, 21))
