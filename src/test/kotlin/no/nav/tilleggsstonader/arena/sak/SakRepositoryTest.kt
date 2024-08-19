@@ -44,7 +44,7 @@ class SakRepositoryTest : IntegrationTest() {
         val sak = sakRepository.finnSaker(setOf(FNR)).single()
 
         assertThat(sak.saksforhold).isNotNull()
-        assertThat(sak.saksforhold!!.målgruppe).isEqualTo(Målgruppe.NEDSATT__ARBEIDSEVNE)
+        assertThat(sak.saksforhold!!.målgruppe).isEqualTo(Målgruppe.NEDSATT_ARBEIDSEVNE)
         assertThat(sak.saksforhold!!.fom).isEqualTo(LocalDate.of(2021, 2, 25))
         assertThat(sak.saksforhold!!.tom).isEqualTo(LocalDate.of(2022, 2, 25))
         assertThat(sak.saksforhold!!.kilde).isEqualTo("BRUKERREGISTRERT")
