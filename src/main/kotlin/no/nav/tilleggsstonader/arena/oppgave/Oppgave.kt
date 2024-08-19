@@ -1,9 +1,6 @@
 package no.nav.tilleggsstonader.arena.oppgave
 
 import no.nav.tilleggsstonader.kontrakter.arena.oppgave.ArenaOppgaveDto
-import no.nav.tilleggsstonader.kontrakter.arena.sak.Målgruppe
-import org.springframework.data.relational.core.mapping.Column
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 /**
@@ -21,11 +18,8 @@ data class Oppgave(
     val id: Long,
     val tittel: String,
     val kommentar: String,
-    val fristFerdigstillelse: LocalDate,
     val benk: String,
     val opprettetTidspunkt: LocalDateTime,
-    @Column("maalgruppe")
-    val målgruppe: Målgruppe?,
 )
 
 /**
@@ -38,11 +32,9 @@ fun Oppgave.tilOppgaveArena(): ArenaOppgaveDto {
         id = id,
         tittel = tittel,
         kommentar = kommentar,
-        fristFerdigstillelse = fristFerdigstillelse,
         benk = navnBenk,
         tildelt = benk.takeIf { navnBenk == null },
         opprettetTidspunkt = opprettetTidspunkt,
-        målgruppe = målgruppe,
     )
 }
 

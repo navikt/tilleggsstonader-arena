@@ -2,11 +2,9 @@ package no.nav.tilleggsstonader.arena.oppgave
 
 import no.nav.tilleggsstonader.arena.IntegrationTest
 import no.nav.tilleggsstonader.arena.TestConstants
-import no.nav.tilleggsstonader.kontrakter.arena.sak.Målgruppe
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 class OppgaveRepositoryTest : IntegrationTest() {
@@ -18,20 +16,18 @@ class OppgaveRepositoryTest : IntegrationTest() {
 
     @Test
     fun `skal mappe felter`() {
-        utilRepository.lagSaksforhold()
-        utilRepository.opprettTaskInstance(medSakId = true)
+        utilRepository.opprettTaskInstance()
 
         val oppgave = oppgaveRepository.hentOppgaver(identer).single()
-        oppgave.assertOppgaveFelter(målgruppeMedVerdi = true)
+        oppgave.assertOppgaveFelter()
     }
 
     @Test
     fun `har målgruppe null hvis ikke caseContext er registrert`() {
-        utilRepository.lagSaksforhold()
-        utilRepository.opprettTaskInstance(medSakId = false)
+        utilRepository.opprettTaskInstance()
 
         val oppgave = oppgaveRepository.hentOppgaver(identer).single()
-        oppgave.assertOppgaveFelter(målgruppeMedVerdi = false)
+        oppgave.assertOppgaveFelter()
     }
 
     @Test
@@ -40,18 +36,11 @@ class OppgaveRepositoryTest : IntegrationTest() {
         assertThat(oppgaveRepository.hentOppgaver(identer)).isEmpty()
     }
 
-    private fun Oppgave.assertOppgaveFelter(målgruppeMedVerdi: Boolean = true) {
+    private fun Oppgave.assertOppgaveFelter() {
         assertThat(id).isEqualTo(300)
         assertThat(tittel).isEqualTo("tittel")
         assertThat(kommentar).isEqualTo("kommentar")
-        assertThat(fristFerdigstillelse).isEqualTo(LocalDate.of(2023, 2, 21))
         assertThat(benk).isEqualTo("4462")
         assertThat(opprettetTidspunkt).isEqualTo(LocalDateTime.of(2022, 2, 20, 19, 1))
-
-        if (målgruppeMedVerdi) {
-            assertThat(målgruppe).isEqualTo(Målgruppe.NEDSATT__ARBEIDSEVNE)
-        } else {
-            assertThat(målgruppe).isNull()
-        }
     }
 }

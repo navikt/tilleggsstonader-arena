@@ -1,7 +1,6 @@
 package no.nav.tilleggsstonader.arena.oppgave
 
 import no.nav.tilleggsstonader.kontrakter.arena.oppgave.ArenaOppgaveDto
-import no.nav.tilleggsstonader.kontrakter.arena.sak.Målgruppe
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -16,11 +15,9 @@ class OppgaveTest {
             id = 300,
             tittel = "tittel",
             kommentar = "kommentar",
-            fristFerdigstillelse = LocalDate.of(2024, 1, 3),
             benk = "Inn",
             tildelt = null,
             opprettetTidspunkt = LocalDate.of(2024, 1, 3).atTime(10, 45),
-            målgruppe = Målgruppe.NEDSATT__ARBEIDSEVNE,
         )
         assertThat(oppgave().tilOppgaveArena()).isEqualTo(oppgave)
     }
@@ -47,17 +44,13 @@ class OppgaveTest {
         id: Long = 300,
         tittel: String = "tittel",
         kommentar: String = "kommentar",
-        fristFerdigstillelse: LocalDate = LocalDate.of(2024, 1, 3),
         benk: String = "4462",
         opprettetTidspunkt: LocalDateTime = LocalDate.of(2024, 1, 3).atTime(10, 45),
-        målgruppe: Målgruppe? = Målgruppe.NEDSATT__ARBEIDSEVNE,
     ) = Oppgave(
         id = id,
         tittel = tittel,
         kommentar = kommentar,
-        fristFerdigstillelse = fristFerdigstillelse,
         benk = benk,
         opprettetTidspunkt = opprettetTidspunkt,
-        målgruppe = målgruppe,
     )
 }

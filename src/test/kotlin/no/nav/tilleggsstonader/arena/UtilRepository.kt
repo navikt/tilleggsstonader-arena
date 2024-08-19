@@ -199,7 +199,7 @@ values (:vedtakId,
     /**
      * Oppretter en oppgave
      */
-    fun opprettTaskInstance(medSakId: Boolean = true) {
+    fun opprettTaskInstance() {
         val mainProcessId = 456
         val sakId = "100"
         jdbcTemplate.update(
@@ -220,21 +220,5 @@ values (:vedtakId,
                 "mainProcessId" to mainProcessId,
             ),
         )
-        if (medSakId) {
-            jdbcTemplate.update(
-                """          
-                INSERT INTO variablebinding (INSTANCEELEMENTID, VARIABLENAME, STOREDOBJECTTYPE, STOREDOBJECT) VALUES 
-            (:instanceElementId,
-            'caseContext',
-            'a.domain.Sak',
-            :sakId
-            );
-        """,
-                mapOf(
-                    "instanceElementId" to mainProcessId,
-                    "sakId" to sakId,
-                ),
-            )
-        }
     }
 }
