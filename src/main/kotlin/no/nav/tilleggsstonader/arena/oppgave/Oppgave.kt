@@ -17,7 +17,7 @@ import java.time.LocalDateTime
 data class Oppgave(
     val id: Long,
     val tittel: String,
-    val kommentar: String,
+    val kommentar: String?,
     val benk: String,
     val opprettetTidspunkt: LocalDateTime,
 )

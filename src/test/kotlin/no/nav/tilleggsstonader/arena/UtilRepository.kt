@@ -199,15 +199,16 @@ values (:vedtakId,
     /**
      * Oppretter en oppgave
      */
-    fun opprettTaskInstance() {
+    fun opprettTaskInstance(
+        kommentar: String? = "kommentar",
+    ) {
         val mainProcessId = 456
-        val sakId = "100"
         jdbcTemplate.update(
             """            
                 INSERT INTO taskinstance (ID,DESCRIPTION,NOTE,DUEDATE,MAINPROCESS_ID,CASECONTEXT,USERNAME,REG_DATO) VALUES 
             (300,
             'tittel',
-            'kommentar',
+            :kommentar,
             to_date('21.02.2023','DD.MM.RRRR'),
             :mainProcessId,
             'TS:' || :fnr,
@@ -218,6 +219,7 @@ values (:vedtakId,
             mapOf(
                 "fnr" to TestConstants.FNR,
                 "mainProcessId" to mainProcessId,
+                "kommentar" to kommentar,
             ),
         )
     }

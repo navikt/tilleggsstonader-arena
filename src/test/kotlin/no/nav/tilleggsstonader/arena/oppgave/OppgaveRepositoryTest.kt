@@ -36,6 +36,14 @@ class OppgaveRepositoryTest : IntegrationTest() {
         assertThat(oppgaveRepository.hentOppgaver(identer)).isEmpty()
     }
 
+    @Test
+    fun `kommentar kan være null`() {
+        utilRepository.opprettTaskInstance(kommentar = null)
+
+        val oppgave = oppgaveRepository.hentOppgaver(identer).single()
+        assertThat(oppgave.kommentar).isNull()
+    }
+
     private fun Oppgave.assertOppgaveFelter() {
         assertThat(id).isEqualTo(300)
         assertThat(tittel).isEqualTo("tittel")
