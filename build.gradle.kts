@@ -102,3 +102,7 @@ tasks.test {
 tasks.bootJar {
     archiveFileName.set("app.jar")
 }
+
+tasks.cyclonedxBom {
+    setIncludeConfigs(listOf("runtimeClasspath"))
+}
