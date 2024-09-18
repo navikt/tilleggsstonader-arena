@@ -46,4 +46,5 @@ data class Vedtak(
 
 fun Stønadstype.rettigheter(): List<String> = when (this) {
     Stønadstype.BARNETILSYN -> setOf(Rettighet.TILSYN_BARN, Rettighet.TILSYN_BARN_ARBEIDSSSØKERE).map { it.kodeArena }
+    Stønadstype.LÆREMIDLER -> setOf(Rettighet.LÆREMIDLER, Rettighet.LÆREMIDLER_ARBEIDSSSØKERE).map { it.kodeArena }
 }
