@@ -23,14 +23,13 @@ jobs:
           cache: 'gradle'
 
       - name: Setup Gradle to generate and submit dependency graphs
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v4
         env:
           # Eksluder test dependencies
           DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: compileClasspath|runtimeClasspath
         with:
           gradle-version: wrapper
           dependency-graph: generate-and-submit
-          arguments: --configuration-cache test
 
       - name: Run a build, generating the dependency graph snapshot which will be submitted
-        run: ./gradlew build -x :check -x :cyclonedxBom
+        run: ./gradlew --configuration-cache build -x :check -x :cyclonedxBom
