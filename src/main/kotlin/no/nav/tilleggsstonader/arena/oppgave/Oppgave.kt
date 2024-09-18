@@ -16,7 +16,7 @@ import java.time.LocalDateTime
  */
 data class Oppgave(
     val id: Long,
-    val tittel: String,
+    val tittel: String?,
     val kommentar: String?,
     val benk: String,
     val opprettetTidspunkt: LocalDateTime,
@@ -30,7 +30,7 @@ fun Oppgave.tilOppgaveArena(): ArenaOppgaveDto {
     val navnBenk = mapNavnBenk(benk)
     return ArenaOppgaveDto(
         id = id,
-        tittel = tittel,
+        tittel = tittel ?: "Mangler tittel",
         kommentar = kommentar,
         benk = navnBenk,
         tildelt = benk.takeIf { navnBenk == null },
