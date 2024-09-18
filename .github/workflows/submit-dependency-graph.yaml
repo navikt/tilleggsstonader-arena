@@ -24,12 +24,12 @@ jobs:
 
       - name: Setup Gradle to generate and submit dependency graphs
         uses: gradle/actions/setup-gradle@v4
-        env:
-          # Eksluder test dependencies
-          DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: compileClasspath|runtimeClasspath
         with:
           gradle-version: wrapper
           dependency-graph: generate-and-submit
 
       - name: Run a build, generating the dependency graph snapshot which will be submitted
+        env:
+          # Eksluder test dependencies
+          DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: compileClasspath|runtimeClasspath
         run: ./gradlew --configuration-cache build -x :check -x :cyclonedxBom
