@@ -5,4 +5,5 @@ on:
 
 jobs:
   build:
+    name: "Bygger appen, sjekker linting og kjører testene"
     uses: navikt/tilleggsstonader/.github/workflows/java-build-and-test.yml@main
