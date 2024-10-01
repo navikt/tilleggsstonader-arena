@@ -9,6 +9,7 @@ object VedtakStatusMapper {
         val innvilgedeVedtak = alleVedtak.filter { it.utfall == UtfallVedtak.JA }
         return VedtakStatus(
             harVedtak = alleVedtak.isNotEmpty(),
+            harInnvilgetVedtak = innvilgedeVedtak.isNotEmpty(),
             harAktivtVedtak = innvilgedeVedtak.any { it.tom != null && it.tom > osloDateNow() },
             harVedtakUtenUtfall = alleVedtak.any { it.utfall == null },
             vedtakTom = innvilgedeVedtak.mapNotNull { it.tom }.maxOrNull(),
