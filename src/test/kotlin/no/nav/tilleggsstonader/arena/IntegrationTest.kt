@@ -61,7 +61,7 @@ abstract class IntegrationTest {
     }
 
     private fun resetDatabase() {
-        listOf("person", "saksforhold", " sak", "vedtak", "taskinstance", "variablebinding").forEach {
+        listOf("person", "saksforhold", " sak", "vedtak", "taskinstance", "variablebinding", "ram_aktivitet").forEach {
             try {
                 jdbcTemplate.update("DELETE FROM $it", emptyMap<String, String>())
             } catch (e: Exception) {

@@ -114,7 +114,7 @@ class UtilRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) {
             KILDE,REG_DATO,REG_USER,MOD_DATO,MOD_USER,TILTAKDELTAKER_ID,HIST_TILTAKDELTAKER_ID) values 
             ('101',
             'NEDSARBEVN',
-            '200',
+            :aktivitetId,
             :sakId,
             :personId,
             to_date('25.02.2021','DD.MM.RRRR'),
@@ -131,6 +131,27 @@ class UtilRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) {
             mapOf(
                 "sakId" to "100",
                 "personId" to 1,
+                "aktivitetId" to "200",
+            ),
+        )
+    }
+
+    fun lagAktivitet(aktivitetkode: String = "JOBBKLUBB") {
+        jdbcTemplate.update(
+            """
+               INSERT INTO ram_aktivitet (aktivitetkode, beskrivelse, aktivitet_id, aktivitetstatuskode) VALUES 
+               (
+               :aktivitetkode,
+               :beskrivelse,
+               :aktivitetId,
+               :statuskode
+               ) 
+            """,
+            mapOf(
+                "aktivitetkode" to aktivitetkode,
+                "beskrivelse" to "En beskrivelse",
+                "aktivitetId" to "200",
+                "statuskode" to "GJENN",
             ),
         )
     }

@@ -5,6 +5,7 @@ import no.nav.tilleggsstonader.arena.TestConstants.FNR
 import no.nav.tilleggsstonader.kontrakter.arena.sak.Målgruppe
 import no.nav.tilleggsstonader.kontrakter.arena.sak.StatusSak
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -48,7 +49,45 @@ class SakRepositoryTest : IntegrationTest() {
         assertThat(sak.saksforhold!!.fom).isEqualTo(LocalDate.of(2021, 2, 25))
         assertThat(sak.saksforhold!!.tom).isEqualTo(LocalDate.of(2022, 2, 25))
         assertThat(sak.saksforhold!!.kilde).isEqualTo("BRUKERREGISTRERT")
+        assertThat(sak.saksforhold!!.aktivitetId).isEqualTo(200)
         assertThat(sak.saksforhold!!.erBrukerregistrert()).isTrue()
+    }
+
+    @Nested
+    inner class Aktiviteter {
+
+        @BeforeEach
+        fun setUp() {
+            utilRepository.lagPerson()
+            utilRepository.lagSak()
+            utilRepository.lagSaksforhold()
+        }
+
+        @Test
+        fun `skal finne saker med aktivitetId`() {
+            utilRepository.lagAktivitet()
+            val aktiviteter = sakRepository.finnAktiviteter(setOf(200))
+            assertThat(aktiviteter).hasSize(1)
+            with(aktiviteter.single()) {
+                assertThat(this.aktivitetId).isEqualTo(200)
+                assertThat(this.typekode).isEqualTo("JOBBKLUBB")
+                assertThat(this.type).isEqualTo("Intern jobbklubb")
+                assertThat(this.statuskode).isEqualTo("GJENN")
+                assertThat(this.status).isEqualTo("Gjennomføres")
+                assertThat(this.beskrivelse).isEqualTo("En beskrivelse")
+                assertThat(this.gjelderUtdanning).isFalse()
+            }
+        }
+
+        @Test
+        fun `skal mappe gjelderUtdanning til true for utdanning for Ordinær utdanning`() {
+            utilRepository.lagAktivitet("OUTDEF")
+            val aktiviteter = sakRepository.finnAktiviteter(setOf(200))
+            with(aktiviteter.single()) {
+                assertThat(this.typekode).isEqualTo("OUTDEF")
+                assertThat(this.gjelderUtdanning).isTrue()
+            }
+        }
     }
 
     @Nested
