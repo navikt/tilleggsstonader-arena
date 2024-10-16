@@ -1,7 +1,7 @@
 package no.nav.tilleggsstonader.arena.vedtak
 
 import no.nav.security.token.support.core.api.ProtectedWithClaims
-import no.nav.tilleggsstonader.kontrakter.arena.vedtak.SakOgVedtakDto
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.ArenaSakOgVedtakDto
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterRequest
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -16,7 +16,7 @@ class VedtakController(
 ) {
 
     @PostMapping
-    fun hentVedtak(@RequestBody request: IdenterRequest): SakOgVedtakDto {
+    fun hentVedtak(@RequestBody request: IdenterRequest): ArenaSakOgVedtakDto {
         return SakOgVedtakDtoMapper.map(vedtakService.hentSakOgVedtak(request.identer))
     }
 }

@@ -3,8 +3,8 @@ package no.nav.tilleggsstonader.arena.vedtak
 import no.nav.tilleggsstonader.arena.sak.Aktivitet
 import no.nav.tilleggsstonader.arena.sak.Saksforhold
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.AktivitetDto
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.ArenaSakOgVedtakDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.SakDto
-import no.nav.tilleggsstonader.kontrakter.arena.vedtak.SakOgVedtakDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.VedtakDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.VedtakfaktaDto
 import no.nav.tilleggsstonader.libs.log.SecureLogger.secureLogger
@@ -16,10 +16,10 @@ object SakOgVedtakDtoMapper {
 
     private val REGEX_DATO = """^\d{2}-\d{2}-\d{4}$""".toRegex()
 
-    fun map(sakOgVedtak: SakOgVedtak): SakOgVedtakDto {
+    fun map(sakOgVedtak: SakOgVedtak): ArenaSakOgVedtakDto {
         val aktiviteter = sakOgVedtak.aktiviteter.associateBy { it.aktivitetId }
         val vedtakfakta = sakOgVedtak.vedtakfakta.groupBy { it.vedtakId }
-        return SakOgVedtakDto(
+        return ArenaSakOgVedtakDto(
             vedtak = sakOgVedtak.vedtak.map { mapVedtak(it, vedtakfakta) }.sortedWith(vedtaksortering),
             saker = mapSaker(sakOgVedtak, aktiviteter),
         )
