@@ -36,6 +36,7 @@ object SakOgVedtakDtoMapper {
     }
 
     private fun mapVedtak(vedtak: Vedtak, vedtakfakta: Map<Int, List<Vedtakfakta>>) = VedtakDto(
+        sakId = vedtak.sakId,
         type = vedtak.vedtaktype.navn,
         status = vedtak.vedtakstatus.navn,
         rettighet = vedtak.rettighet.navn,
