@@ -217,6 +217,18 @@ values (:vedtakId,
         )
     }
 
+    fun lagVedtakFakta() {
+        jdbcTemplate.update(
+            "INSERT INTO vedtakfakta (vedtak_id, vedtakfaktakode, vedtakverdi) VALUES" +
+                " (:vedtakId, :vedtakfaktakode, :vedtakverdi)",
+            mapOf(
+                "vedtakId" to 400,
+                "vedtakfaktakode" to "AAPJUSTFD",
+                "vedtakverdi" to "2023-01-01",
+            ),
+        )
+    }
+
     /**
      * Oppretter en oppgave
      */

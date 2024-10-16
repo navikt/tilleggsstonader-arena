@@ -22,4 +22,15 @@ interface VedtakRepository : CrudRepository<Vedtak, Int> {
     """,
     )
     fun finnVedtak(identer: Set<String>, rettigheter: Collection<String>): List<Vedtak>
+
+    @Query(
+        """
+    SELECT 
+      vf.vedtak_id, vft.skjermbildetekst, vf.vedtakverdi, vft.oracletype
+    FROM vedtakfakta vf
+     JOIN vedtakfaktatype vft on vft.vedtakfaktakode = vf.vedtakfaktakode
+    WHERE vedtak_id IN (:vedtakIder)
+    """,
+    )
+    fun finnVedtakFakta(vedtakIder: Set<Int>): List<Vedtakfakta>
 }

@@ -45,4 +45,19 @@ class VedtakRepositoryTest : IntegrationTest() {
         assertThat(vedtak.tom).isEqualTo(LocalDate.of(2023, 6, 4))
         assertThat(vedtak.totalbeløp).isEqualTo(20130)
     }
+
+    @Test
+    fun `skal finne vedtakfakta til vedtak`() {
+        utilRepository.lagVedtakFakta()
+
+        val vedtakfakta = vedtakRepository.finnVedtakFakta(setOf(400))
+        assertThat(vedtakfakta).hasSize(1)
+
+        with(vedtakfakta.single()) {
+            assertThat(this.vedtakId).isEqualTo(400)
+            assertThat(this.skjermbildetekst).isEqualTo("Justert fra dato")
+            assertThat(this.vedtakverdi).isEqualTo("2023-01-01")
+            assertThat(this.oracletype).isEqualTo("DATE")
+        }
+    }
 }
