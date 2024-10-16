@@ -35,6 +35,7 @@ data class Saksforhold(
     @Column("dato_til")
     val tom: LocalDate?,
     val kilde: String,
+    val aktivitetId: Int?,
 ) {
     fun erBrukerregistrert() = kilde == "BRUKERREGISTRERT"
 }

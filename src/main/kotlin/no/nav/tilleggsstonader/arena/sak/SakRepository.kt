@@ -25,7 +25,7 @@ interface SakRepository : CrudRepository<Sak, Int> {
      s.sak_id,p.person_id,
      s.reg_dato,s.reg_user,s.mod_dato,s.mod_user,s.dato_avsluttet,
      s.sakstatuskode,s.status_endret,
-     sf.saksforhold_id,sf.maalgruppekode,sf.dato_fra,sf.dato_til,sf.kilde
+     sf.saksforhold_id,sf.maalgruppekode,sf.dato_fra,sf.dato_til,sf.kilde, sf.aktivitet_id
     FROM sak s
       JOIN person p ON p.person_id = s.objekt_id
       LEFT JOIN saksforhold sf ON sf.sak_id = s.sak_id
@@ -33,6 +33,24 @@ interface SakRepository : CrudRepository<Sak, Int> {
     """,
     )
     fun finnSaker(identer: Collection<String>): List<Sak>
+
+    @Query(
+        """
+        SELECT
+        ra.aktivitet_id,
+        ra.aktivitetkode AS typekode,
+        rat.aktivitettypenavn AS type,
+        ra.aktivitetstatuskode AS statuskode,
+        ras.aktivitetstatusnavn AS status,
+        ra.beskrivelse,
+        CASE WHEN rat.status_utdanning = 'J' THEN 'true' else 'false' END gjelder_utdanning
+        FROM ram_aktivitet ra
+        JOIN ram_aktivitettype rat ON rat.aktivitetkode = ra.aktivitetkode
+        JOIN aktivitetstatus ras ON ras.aktivitetstatuskode = ra.aktivitetstatuskode
+        WHERE ra.aktivitet_id IN (:aktivitetIder)
+    """,
+    )
+    fun finnAktiviteter(aktivitetIder: Set<Int>): List<Aktivitet>
 
     @Query(
         """
