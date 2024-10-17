@@ -30,6 +30,8 @@ data class Vedtak(
     val datoMottatt: LocalDate,
     val vedtakIdRelatert: Int?,
     val personId: Int,
+    @Column("brukerid_ansvarlig")
+    val brukerIdAnsvarlig: String?,
     @Column("brukerid_beslutter")
     val brukerIdBeslutter: String?,
     val datoInnstilt: LocalDate?,

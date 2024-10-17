@@ -33,4 +33,16 @@ interface VedtakRepository : CrudRepository<Vedtak, Int> {
     """,
     )
     fun finnVedtakFakta(vedtakIder: Set<Int>): List<Vedtakfakta>
+
+    @Query(
+        """
+        SELECT 
+        vv.vedtak_id, vt.skjermbildetekst, vs.vilkaarstatusnavn, vv.vurdert_av
+        FROM vilkaarvurdering vv 
+        JOIN vilkaartype vt ON vt.vilkaarkode = vv.vilkaarkode
+        JOIN vilkaarstatus vs ON vs.vilkaarstatuskode = vv.vilkaarstatuskode
+        WHERE vedtak_id IN (:vedtakIder)
+    """,
+    )
+    fun finnVilkårsvurderinger(vedtakIder: Set<Int>): List<Vilkårsvurdering>
 }

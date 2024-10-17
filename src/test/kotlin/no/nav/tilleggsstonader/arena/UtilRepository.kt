@@ -139,12 +139,14 @@ class UtilRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) {
     fun lagAktivitet(aktivitetkode: String = "JOBBKLUBB") {
         jdbcTemplate.update(
             """
-               INSERT INTO ram_aktivitet (aktivitetkode, beskrivelse, aktivitet_id, aktivitetstatuskode) VALUES 
+               INSERT INTO ram_aktivitet (aktivitetkode, beskrivelse, aktivitet_id, aktivitetstatuskode, dato_fra, dato_til) VALUES 
                (
                :aktivitetkode,
                :beskrivelse,
                :aktivitetId,
-               :statuskode
+               :statuskode,
+                to_date('12.01.2016','DD.MM.RRRR'),
+                to_date('12.01.2018','DD.MM.RRRR')
                ) 
             """,
             mapOf(
@@ -225,6 +227,19 @@ values (:vedtakId,
                 "vedtakId" to 400,
                 "vedtakfaktakode" to "AAPJUSTFD",
                 "vedtakverdi" to "2023-01-01",
+            ),
+        )
+    }
+
+    fun lagVilkårsvurdering() {
+        jdbcTemplate.update(
+            "INSERT INTO vilkaarvurdering (vedtak_id, vilkaarkode, vilkaarstatuskode, vurdert_av) VALUES" +
+                " (:vedtakId, :vilkaarkode, :vilkaarstatuskode, :vurdert_av)",
+            mapOf(
+                "vedtakId" to 400,
+                "vilkaarkode" to "OPPHINST",
+                "vilkaarstatuskode" to "J",
+                "vurdert_av" to "Nissen",
             ),
         )
     }

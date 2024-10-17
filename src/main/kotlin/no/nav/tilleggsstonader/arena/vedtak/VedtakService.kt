@@ -15,11 +15,13 @@ class VedtakService(
         val alleVedtak = vedtakService.finnVedtak(identer, Rettighet.entries.map { it.kodeArena })
         val saker = sakRepository.finnSaker(identer)
         val vedtakfakta = vedtakRepository.finnVedtakFakta(alleVedtak.map { it.vedtakId }.toSet())
+        val vilkårsvurderinger = vedtakRepository.finnVilkårsvurderinger(alleVedtak.map { it.vedtakId }.toSet())
         val aktiviteter = sakRepository.finnAktiviteter(saker.mapNotNull { it.saksforhold?.aktivitetId }.toSet())
         return SakOgVedtak(
             saker = saker,
             vedtak = alleVedtak,
             vedtakfakta = vedtakfakta,
+            vilkårsvurderinger = vilkårsvurderinger,
             aktiviteter = aktiviteter,
         )
     }

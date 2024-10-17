@@ -40,6 +40,8 @@ interface SakRepository : CrudRepository<Sak, Int> {
         ra.aktivitet_id,
         ra.aktivitetkode AS typekode,
         rat.aktivitettypenavn AS type,
+        ra.dato_fra AS fom,
+        ra.dato_til AS tom,
         ra.aktivitetstatuskode AS statuskode,
         ras.aktivitetstatusnavn AS status,
         ra.beskrivelse,

@@ -7,6 +7,7 @@ import no.nav.tilleggsstonader.kontrakter.arena.vedtak.ArenaSakOgVedtakDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.SakDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.VedtakDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.VedtakfaktaDto
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.VilkårsvurderingDto
 import no.nav.tilleggsstonader.libs.log.SecureLogger.secureLogger
 import org.slf4j.LoggerFactory
 
@@ -19,8 +20,11 @@ object SakOgVedtakDtoMapper {
     fun map(sakOgVedtak: SakOgVedtak): ArenaSakOgVedtakDto {
         val aktiviteter = sakOgVedtak.aktiviteter.associateBy { it.aktivitetId }
         val vedtakfakta = sakOgVedtak.vedtakfakta.groupBy { it.vedtakId }
+        val vilkårsvurderinger = sakOgVedtak.vilkårsvurderinger.groupBy { it.vedtakId }
         return ArenaSakOgVedtakDto(
-            vedtak = sakOgVedtak.vedtak.map { mapVedtak(it, vedtakfakta) }.sortedWith(vedtaksortering),
+            vedtak = sakOgVedtak.vedtak
+                .map { mapVedtak(it, vedtakfakta, vilkårsvurderinger) }
+                .sortedWith(vedtaksortering),
             saker = mapSaker(sakOgVedtak, aktiviteter),
         )
     }
@@ -35,7 +39,11 @@ object SakOgVedtakDtoMapper {
         )
     }
 
-    private fun mapVedtak(vedtak: Vedtak, vedtakfakta: Map<Int, List<Vedtakfakta>>) = VedtakDto(
+    private fun mapVedtak(
+        vedtak: Vedtak,
+        vedtakfakta: Map<Int, List<Vedtakfakta>>,
+        vilkårsvurderinger: Map<Int, List<Vilkårsvurdering>>,
+    ) = VedtakDto(
         sakId = vedtak.sakId,
         type = vedtak.vedtaktype.navn,
         status = vedtak.vedtakstatus.navn,
@@ -47,7 +55,26 @@ object SakOgVedtakDtoMapper {
         datoInnstillt = vedtak.datoInnstilt,
         utfall = vedtak.utfall?.navn,
         vedtakfakta = mapVedtakFakta(vedtak, vedtakfakta),
+        vilkårsvurderinger = mapVilkårsvurderinger(vedtak, vilkårsvurderinger),
+        datoMottatt = vedtak.datoMottatt,
+        saksbehandler = vedtak.brukerIdAnsvarlig,
+        beslutter = vedtak.brukerIdBeslutter,
     )
+
+    private fun mapVilkårsvurderinger(
+        vedtak: Vedtak,
+        vilkårsvurderinger: Map<Int, List<Vilkårsvurdering>>,
+    ): List<VilkårsvurderingDto> {
+        return vilkårsvurderinger
+            .getOrDefault(vedtak.vedtakId, emptyList())
+            .map {
+                VilkårsvurderingDto(
+                    type = it.skjermbildetekst,
+                    status = it.vilkaarstatusnavn,
+                    vurdertAv = it.vurdertAv,
+                )
+            }
+    }
 
     private fun mapVedtakFakta(
         vedtak: Vedtak,
@@ -85,6 +112,8 @@ object SakOgVedtakDtoMapper {
                     aktivitetId = it.aktivitetId,
                     type = it.type,
                     status = it.status,
+                    fom = it.fom,
+                    tom = it.tom,
                     beskrivelse = it.beskrivelse,
                     gjelderUtdanning = it.gjelderUtdanning,
                     typekode = it.typekode,

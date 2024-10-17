@@ -60,4 +60,19 @@ class VedtakRepositoryTest : IntegrationTest() {
             assertThat(this.oracletype).isEqualTo("DATE")
         }
     }
+
+    @Test
+    fun `skal finne vilkårsvurdering til vedtak`() {
+        utilRepository.lagVilkårsvurdering()
+
+        val vilkårsvurderinger = vedtakRepository.finnVilkårsvurderinger(setOf(400))
+        assertThat(vilkårsvurderinger).hasSize(1)
+
+        with(vilkårsvurderinger.single()) {
+            assertThat(this.vedtakId).isEqualTo(400)
+            assertThat(this.skjermbildetekst).contains("Dagpenger - Stønadsmottakeren")
+            assertThat(this.vilkaarstatusnavn).isEqualTo("Oppfylt")
+            assertThat(this.vurdertAv).isEqualTo("Nissen")
+        }
+    }
 }
