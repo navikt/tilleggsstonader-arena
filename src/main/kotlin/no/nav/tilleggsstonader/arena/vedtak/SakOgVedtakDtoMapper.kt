@@ -69,8 +69,8 @@ object SakOgVedtakDtoMapper {
             .getOrDefault(vedtak.vedtakId, emptyList())
             .map {
                 VilkårsvurderingDto(
-                    type = it.skjermbildetekst,
-                    status = it.vilkaarstatusnavn,
+                    vilkår = it.skjermbildetekst,
+                    vurdering = it.vilkaarstatusnavn,
                     vurdertAv = it.vurdertAv,
                 )
             }
