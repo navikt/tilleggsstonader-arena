@@ -73,7 +73,7 @@ object SakOgVedtakDtoMapper {
                     vurdering = it.vilkaarstatusnavn,
                     vurdertAv = it.vurdertAv,
                 )
-            }
+            }.sortedBy { it.vilkår }
     }
 
     private fun mapVedtakFakta(
