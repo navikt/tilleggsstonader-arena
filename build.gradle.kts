@@ -1,8 +1,8 @@
 val javaVersion = JavaLanguageVersion.of(21)
-val tilleggsstønaderLibsVersion = "2024.10.30-09.56.91115fdcae1e"
+val tilleggsstønaderLibsVersion = "2024.11.22-08.39.6f6ddad7d84d"
 val tilleggsstønaderKontrakterVersion = "2024.10.31-11.26.7172148519ea"
 val familieProsesseringVersion = "2.20231212093500_bfa0e7c"
-val tokenSupportVersion = "5.0.8"
+val tokenSupportVersion = "5.0.11"
 
 group = "no.nav.tilleggsstonader.arena"
 version = "1.0.0"
@@ -15,7 +15,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.51.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
 
-    id("org.springframework.boot") version "3.3.5"
+    id("org.springframework.boot") version "3.4.0"
     id("io.spring.dependency-management") version "1.1.6"
     kotlin("plugin.spring") version "2.0.21"
 
@@ -54,7 +54,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("com.oracle.database.jdbc:ojdbc8:23.5.0.24.07")
+    implementation("com.oracle.database.jdbc:ojdbc8:23.6.0.24.10")
 
     // Logging
     implementation("net.logstash.logback:logstash-logback-encoder:8.0")
