@@ -37,9 +37,20 @@ class VedtakStatusMapperTest {
 
         @Test
         fun `har kun aktivt vedtak hvis utfall er JA og tom er større enn dagens dato`() {
-            val vedtakStatus =
-                tilVedtakStatus(listOf(vedtak(utfall = UtfallVedtak.JA, tom = LocalDate.now().plusDays(1))))
+            val vedtak = vedtak(
+                utfall = UtfallVedtak.JA,
+                tom = LocalDate.now().plusDays(1),
+                datoInnstilt = LocalDate.now(),
+            )
+            val vedtakStatus = tilVedtakStatus(listOf(vedtak))
             assertThat(vedtakStatus.harAktivtVedtak).isTrue
+        }
+
+        @Test
+        fun `vedtak må være innstilte for at man skal ha et aktivt vedtak`() {
+            val vedtak = vedtak(utfall = UtfallVedtak.JA, tom = LocalDate.now().plusDays(1), datoInnstilt = null)
+            val vedtakStatus = tilVedtakStatus(listOf(vedtak))
+            assertThat(vedtakStatus.harAktivtVedtak).isFalse()
         }
 
         @Test
@@ -89,12 +100,19 @@ class VedtakStatusMapperTest {
             val tom = LocalDate.of(2024, 1, 31)
             val vedtakStatus = tilVedtakStatus(
                 listOf(
-                    vedtak(utfall = UtfallVedtak.JA, tom = tom),
-                    vedtak(utfall = UtfallVedtak.JA, tom = tom.plusDays(1)),
-                    vedtak(utfall = UtfallVedtak.JA, tom = tom.minusDays(1)),
+                    vedtak(utfall = UtfallVedtak.JA, tom = tom, datoInnstilt = LocalDate.now()),
+                    vedtak(utfall = UtfallVedtak.JA, tom = tom.plusDays(1), datoInnstilt = LocalDate.now()),
+                    vedtak(utfall = UtfallVedtak.JA, tom = tom.minusDays(1), datoInnstilt = LocalDate.now()),
                 ),
             )
             assertThat(vedtakStatus.vedtakTom).isEqualTo(tom.plusDays(1))
+        }
+
+        @Test
+        fun `vedtak må være innstilte for at man skal ha et innvilget vedtak`() {
+            val vedtak = vedtak(utfall = UtfallVedtak.JA, tom = LocalDate.of(2024, 1, 31), datoInnstilt = null)
+            val vedtakStatus = tilVedtakStatus(listOf(vedtak))
+            assertThat(vedtakStatus.vedtakTom).isNull()
         }
 
         @Test

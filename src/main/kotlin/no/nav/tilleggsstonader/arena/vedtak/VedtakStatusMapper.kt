@@ -6,7 +6,9 @@ import no.nav.tilleggsstonader.libs.utils.osloDateNow
 
 object VedtakStatusMapper {
     fun tilVedtakStatus(alleVedtak: List<Vedtak>): VedtakStatus {
-        val innvilgedeVedtak = alleVedtak.filter { it.utfall == UtfallVedtak.JA }
+        val innvilgedeVedtak = alleVedtak
+            .filter { it.utfall == UtfallVedtak.JA }
+            .filter { it.datoInnstilt != null }
         return VedtakStatus(
             harVedtak = alleVedtak.isNotEmpty(),
             harInnvilgetVedtak = innvilgedeVedtak.isNotEmpty(),
