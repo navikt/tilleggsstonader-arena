@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.RestController
 class StatusController(
     private val statusService: StatusService,
 ) {
-
     @PostMapping
-    fun hentStatus(@RequestBody request: IdenterStønadstype): ArenaStatusDto {
-        return statusService.hentStatus(request)
-    }
+    fun hentStatus(
+        @RequestBody request: IdenterStønadstype,
+    ): ArenaStatusDto = statusService.hentStatus(request)
 
     @PostMapping("har-saker")
-    fun harSaker(@RequestBody request: IdenterRequest): ArenaStatusHarSakerDto {
-        return statusService.harSaker(request)
-    }
+    fun harSaker(
+        @RequestBody request: IdenterRequest,
+    ): ArenaStatusHarSakerDto = statusService.harSaker(request)
 }

@@ -21,15 +21,12 @@ import kotlin.reflect.KClass
 @Configuration
 @EnableJdbcRepositories("no.nav.tilleggsstonader.arena")
 class DatabaseConfiguration : AbstractJdbcConfiguration() {
+    @Bean
+    fun transactionManager(dataSource: DataSource): PlatformTransactionManager = DataSourceTransactionManager(dataSource)
 
     @Bean
-    fun transactionManager(dataSource: DataSource): PlatformTransactionManager {
-        return DataSourceTransactionManager(dataSource)
-    }
-
-    @Bean
-    override fun jdbcCustomConversions(): JdbcCustomConversions {
-        return JdbcCustomConversions(
+    override fun jdbcCustomConversions(): JdbcCustomConversions =
+        JdbcCustomConversions(
             listOf(
                 StatusSakConverter(),
                 MålgruppeConverter(),
@@ -38,16 +35,15 @@ class DatabaseConfiguration : AbstractJdbcConfiguration() {
                 RettighetConverter(),
             ),
         )
-    }
 }
 
 @ReadingConverter
-abstract class EnumConverter<T>(clazz: KClass<T>) : Converter<String, T> where T : Enum<T>, T : KodeArena {
-
+abstract class EnumConverter<T>(
+    clazz: KClass<T>,
+) : Converter<String, T> where T : Enum<T>, T : KodeArena {
     private val arenaKoder = clazz.java.enumConstants.associateBy { it.kodeArena }
-    override fun convert(verdi: String): T {
-        return arenaKoder[verdi] ?: error("Finner ikke mapping for $verdi")
-    }
+
+    override fun convert(verdi: String): T = arenaKoder[verdi] ?: error("Finner ikke mapping for $verdi")
 }
 
 @ReadingConverter

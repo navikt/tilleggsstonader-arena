@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDate
 
 class VedtakRepositoryTest : IntegrationTest() {
-
     @Autowired
     lateinit var vedtakRepository: VedtakRepository
 

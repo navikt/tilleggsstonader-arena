@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDate
 
 class SakRepositoryTest : IntegrationTest() {
-
     @Autowired
     lateinit var sakRepository: SakRepository
 
@@ -55,7 +54,6 @@ class SakRepositoryTest : IntegrationTest() {
 
     @Nested
     inner class Aktiviteter {
-
         @BeforeEach
         fun setUp() {
             utilRepository.lagPerson()
@@ -92,7 +90,6 @@ class SakRepositoryTest : IntegrationTest() {
 
     @Nested
     inner class HarSaker {
-
         @Test
         fun `har sak`() {
             utilRepository.lagPerson()
@@ -109,7 +106,6 @@ class SakRepositoryTest : IntegrationTest() {
 
     @Nested
     inner class AntallSakerUtenVedtak {
-
         @Test
         fun `har sak uten vedtak`() {
             utilRepository.lagPerson()

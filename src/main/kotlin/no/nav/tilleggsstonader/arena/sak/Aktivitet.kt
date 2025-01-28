@@ -8,7 +8,6 @@ data class Aktivitet(
     val type: String,
     val fom: LocalDate?,
     val tom: LocalDate?,
-
     val statuskode: String,
     val status: String,
     val beskrivelse: String?,

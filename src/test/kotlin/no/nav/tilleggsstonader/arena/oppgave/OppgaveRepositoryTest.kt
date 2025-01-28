@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDateTime
 
 class OppgaveRepositoryTest : IntegrationTest() {
-
     @Autowired
     lateinit var oppgaveRepository: OppgaveRepository
 

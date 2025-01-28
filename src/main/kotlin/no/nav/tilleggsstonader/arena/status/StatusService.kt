@@ -18,30 +18,24 @@ class StatusService(
     private val vedtakRepository: VedtakRepository,
     private val sakRepository: SakRepository,
 ) {
+    fun harSaker(request: IdenterRequest): ArenaStatusHarSakerDto = ArenaStatusHarSakerDto(sakRepository.antallSaker(request.identer) > 0)
 
-    fun harSaker(request: IdenterRequest): ArenaStatusHarSakerDto {
-        return ArenaStatusHarSakerDto(sakRepository.antallSaker(request.identer) > 0)
-    }
-
-    fun hentStatus(request: IdenterStønadstype): ArenaStatusDto {
-        return ArenaStatusDto(
+    fun hentStatus(request: IdenterStønadstype): ArenaStatusDto =
+        ArenaStatusDto(
             sak = hentSakstatus(request),
             vedtak = hentVedtakstatus(request),
         )
-    }
 
-    private fun hentVedtakstatus(request: IdenterStønadstype): VedtakStatus {
-        return vedtakRepository.finnVedtak(request.identer, request.stønadstype.rettigheter())
+    private fun hentVedtakstatus(request: IdenterStønadstype): VedtakStatus =
+        vedtakRepository
+            .finnVedtak(request.identer, request.stønadstype.rettigheter())
             .let(VedtakStatusMapper::tilVedtakStatus)
-    }
 
-    private fun hentSakstatus(request: IdenterStønadstype): SakStatus {
-        return SakStatus(
+    private fun hentSakstatus(request: IdenterStønadstype): SakStatus =
+        SakStatus(
             harAktivSakUtenVedtak = harAktivSakUtenVedtak(request),
         )
-    }
 
-    private fun harAktivSakUtenVedtak(request: IdenterStønadstype): Boolean {
-        return sakRepository.antallSakerUtenVedtak(request.identer, SAK_AKTIVE_STATUSER) > 0
-    }
+    private fun harAktivSakUtenVedtak(request: IdenterStønadstype): Boolean =
+        sakRepository.antallSakerUtenVedtak(request.identer, SAK_AKTIVE_STATUSER) > 0
 }

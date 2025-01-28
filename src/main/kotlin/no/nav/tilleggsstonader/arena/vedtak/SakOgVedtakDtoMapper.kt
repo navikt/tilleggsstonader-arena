@@ -12,7 +12,6 @@ import no.nav.tilleggsstonader.libs.log.SecureLogger.secureLogger
 import org.slf4j.LoggerFactory
 
 object SakOgVedtakDtoMapper {
-
     private val logger = LoggerFactory.getLogger(javaClass)
 
     private val REGEX_DATO = """^\d{2}-\d{2}-\d{4}$""".toRegex()
@@ -22,9 +21,10 @@ object SakOgVedtakDtoMapper {
         val vedtakfakta = sakOgVedtak.vedtakfakta.groupBy { it.vedtakId }
         val vilkårsvurderinger = sakOgVedtak.vilkårsvurderinger.groupBy { it.vedtakId }
         return ArenaSakOgVedtakDto(
-            vedtak = sakOgVedtak.vedtak
-                .map { mapVedtak(it, vedtakfakta, vilkårsvurderinger) }
-                .sortedWith(vedtaksortering),
+            vedtak =
+                sakOgVedtak.vedtak
+                    .map { mapVedtak(it, vedtakfakta, vilkårsvurderinger) }
+                    .sortedWith(vedtaksortering),
             saker = mapSaker(sakOgVedtak, aktiviteter),
         )
     }
@@ -33,10 +33,11 @@ object SakOgVedtakDtoMapper {
         sakOgVedtak: SakOgVedtak,
         aktiviteter: Map<Int, Aktivitet>,
     ) = sakOgVedtak.saker.associate {
-        it.sakId to SakDto(
-            målgruppe = it.saksforhold?.målgruppe?.navn,
-            aktivitet = mapAktivitet(it.saksforhold, aktiviteter),
-        )
+        it.sakId to
+            SakDto(
+                målgruppe = it.saksforhold?.målgruppe?.navn,
+                aktivitet = mapAktivitet(it.saksforhold, aktiviteter),
+            )
     }
 
     private fun mapVedtak(
@@ -64,8 +65,8 @@ object SakOgVedtakDtoMapper {
     private fun mapVilkårsvurderinger(
         vedtak: Vedtak,
         vilkårsvurderinger: Map<Int, List<Vilkårsvurdering>>,
-    ): List<VilkårsvurderingDto> {
-        return vilkårsvurderinger
+    ): List<VilkårsvurderingDto> =
+        vilkårsvurderinger
             .getOrDefault(vedtak.vedtakId, emptyList())
             .map {
                 VilkårsvurderingDto(
@@ -74,20 +75,18 @@ object SakOgVedtakDtoMapper {
                     vurdertAv = it.vurdertAv,
                 )
             }.sortedBy { it.vilkår }
-    }
 
     private fun mapVedtakFakta(
         vedtak: Vedtak,
         vedtakfakta: Map<Int, List<Vedtakfakta>>,
-    ) =
-        vedtakfakta
-            .getOrDefault(vedtak.vedtakId, emptyList())
-            .map {
-                VedtakfaktaDto(
-                    type = it.skjermbildetekst,
-                    verdi = mapVerdi(it),
-                )
-            }.sortedBy { it.type }
+    ) = vedtakfakta
+        .getOrDefault(vedtak.vedtakId, emptyList())
+        .map {
+            VedtakfaktaDto(
+                type = it.skjermbildetekst,
+                verdi = mapVerdi(it),
+            )
+        }.sortedBy { it.type }
 
     fun mapVerdi(vedtakfakta: Vedtakfakta): String? {
         if (vedtakfakta.oracletype == "DATE" && vedtakfakta.vedtakverdi != null && REGEX_DATO.matches(vedtakfakta.vedtakverdi)) {
@@ -105,7 +104,8 @@ object SakOgVedtakDtoMapper {
         saksforhold: Saksforhold?,
         aktiviteter: Map<Int, Aktivitet>,
     ): AktivitetDto? =
-        saksforhold?.aktivitetId
+        saksforhold
+            ?.aktivitetId
             ?.let { aktiviteter[it] }
             ?.let {
                 AktivitetDto(
@@ -121,7 +121,8 @@ object SakOgVedtakDtoMapper {
                 )
             }
 
-    private val vedtaksortering = compareByDescending<VedtakDto> { it.fom }
-        .thenByDescending { it.tom }
-        .thenByDescending { it.datoInnstillt }
+    private val vedtaksortering =
+        compareByDescending<VedtakDto> { it.fom }
+            .thenByDescending { it.tom }
+            .thenByDescending { it.datoInnstillt }
 }

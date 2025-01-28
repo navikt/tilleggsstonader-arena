@@ -39,12 +39,13 @@ fun Oppgave.tilOppgaveArena(): ArenaOppgaveDto {
 }
 
 private val REGEX_4_TALL = """^\d{4}$""".toRegex()
-private val MAPPING_BENK = mapOf(
-    "4462" to "Inn",
-    "4463" to "Klar",
-    "4464" to "Vent",
-    "9958" to "SIAMO",
-)
+private val MAPPING_BENK =
+    mapOf(
+        "4462" to "Inn",
+        "4463" to "Klar",
+        "4464" to "Vent",
+        "9958" to "SIAMO",
+    )
 
 /**
  * Mapper navn til benk hvis vi har mapping

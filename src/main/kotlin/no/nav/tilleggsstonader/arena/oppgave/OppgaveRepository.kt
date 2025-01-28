@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface OppgaveRepository : org.springframework.data.repository.Repository<Oppgave, Int> {
-
     /**
      * @param casecontext er av verdien "TS:<ident>"
      */

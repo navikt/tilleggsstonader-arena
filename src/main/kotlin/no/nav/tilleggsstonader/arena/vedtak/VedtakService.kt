@@ -12,7 +12,6 @@ class VedtakService(
     private val sakRepository: SakRepository,
     private val vedtakRepository: VedtakRepository,
 ) {
-
     fun hentSakOgVedtak(identer: Set<String>): SakOgVedtak {
         val alleVedtak = vedtakService.finnVedtak(identer, Rettighet.entries.map { it.kodeArena })
         val saker = sakRepository.finnSaker(identer)

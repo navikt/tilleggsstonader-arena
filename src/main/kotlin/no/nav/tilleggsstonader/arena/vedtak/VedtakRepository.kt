@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface VedtakRepository : CrudRepository<Vedtak, Int> {
-
     @Query(
         """
     SELECT 
@@ -21,7 +20,10 @@ interface VedtakRepository : CrudRepository<Vedtak, Int> {
       AND v.rettighetkode IN (:rettigheter)
     """,
     )
-    fun finnVedtak(identer: Set<String>, rettigheter: Collection<String>): List<Vedtak>
+    fun finnVedtak(
+        identer: Set<String>,
+        rettigheter: Collection<String>,
+    ): List<Vedtak>
 
     @Query(
         """

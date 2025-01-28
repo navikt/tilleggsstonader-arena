@@ -5,8 +5,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
-class UtilRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) {
-
+class UtilRepository(
+    private val jdbcTemplate: NamedParameterJdbcTemplate,
+) {
     fun lagPerson() {
         jdbcTemplate.update(
             """
@@ -68,9 +69,7 @@ class UtilRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) {
         )
     }
 
-    fun lagSak(
-        status: StatusSak = StatusSak.AKTIV,
-    ) {
+    fun lagSak(status: StatusSak = StatusSak.AKTIV) {
         jdbcTemplate.update(
             """
             INSERT INTO sak (SAK_ID,SAKSKODE,REG_DATO,REG_USER,MOD_DATO,MOD_USER,TABELLNAVNALIAS,
@@ -247,9 +246,7 @@ values (:vedtakId,
     /**
      * Oppretter en oppgave
      */
-    fun opprettTaskInstance(
-        kommentar: String? = "kommentar",
-    ) {
+    fun opprettTaskInstance(kommentar: String? = "kommentar") {
         val mainProcessId = 456
         jdbcTemplate.update(
             """            

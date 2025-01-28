@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface SakRepository : CrudRepository<Sak, Int> {
-
     @Query(
         """
     SELECT 
@@ -66,7 +65,10 @@ interface SakRepository : CrudRepository<Sak, Int> {
       AND s.sakstatuskode IN (:status) 
     """,
     )
-    fun antallSakerUtenVedtak(identer: Collection<String>, status: Collection<String>): Int
+    fun antallSakerUtenVedtak(
+        identer: Collection<String>,
+        status: Collection<String>,
+    ): Int
 }
 
 val SAK_AKTIVE_STATUSER = setOf(StatusSak.AKTIV, StatusSak.OPPRETTET).map { it.kodeArena }

@@ -11,12 +11,10 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
 class VedtakStatusMapperTest {
-
     private val alleUtfall = UtfallVedtak.entries + null
 
     @Nested
     inner class HarVedtak {
-
         @Test
         fun `er uavhengig utfall`() {
             alleUtfall.forEach {
@@ -34,14 +32,14 @@ class VedtakStatusMapperTest {
 
     @Nested
     inner class HarAktivtVedtak {
-
         @Test
         fun `har kun aktivt vedtak hvis utfall er JA og tom er større enn dagens dato`() {
-            val vedtak = vedtak(
-                utfall = UtfallVedtak.JA,
-                tom = LocalDate.now().plusDays(1),
-                datoInnstilt = LocalDate.now(),
-            )
+            val vedtak =
+                vedtak(
+                    utfall = UtfallVedtak.JA,
+                    tom = LocalDate.now().plusDays(1),
+                    datoInnstilt = LocalDate.now(),
+                )
             val vedtakStatus = tilVedtakStatus(listOf(vedtak))
             assertThat(vedtakStatus.harAktivtVedtak).isTrue
         }
@@ -76,7 +74,6 @@ class VedtakStatusMapperTest {
 
     @Nested
     inner class HarVedtakUtenUtfall {
-
         @Test
         fun `true hvis utfall er null`() {
             val vedtakStatus = tilVedtakStatus(listOf(vedtak(utfall = null)))
@@ -94,17 +91,17 @@ class VedtakStatusMapperTest {
 
     @Nested
     inner class HarVedtakTom {
-
         @Test
         fun `skal kun telle de med utfall JA`() {
             val tom = LocalDate.of(2024, 1, 31)
-            val vedtakStatus = tilVedtakStatus(
-                listOf(
-                    vedtak(utfall = UtfallVedtak.JA, tom = tom, datoInnstilt = LocalDate.now()),
-                    vedtak(utfall = UtfallVedtak.JA, tom = tom.plusDays(1), datoInnstilt = LocalDate.now()),
-                    vedtak(utfall = UtfallVedtak.JA, tom = tom.minusDays(1), datoInnstilt = LocalDate.now()),
-                ),
-            )
+            val vedtakStatus =
+                tilVedtakStatus(
+                    listOf(
+                        vedtak(utfall = UtfallVedtak.JA, tom = tom, datoInnstilt = LocalDate.now()),
+                        vedtak(utfall = UtfallVedtak.JA, tom = tom.plusDays(1), datoInnstilt = LocalDate.now()),
+                        vedtak(utfall = UtfallVedtak.JA, tom = tom.minusDays(1), datoInnstilt = LocalDate.now()),
+                    ),
+                )
             assertThat(vedtakStatus.vedtakTom).isEqualTo(tom.plusDays(1))
         }
 
@@ -119,11 +116,12 @@ class VedtakStatusMapperTest {
         fun `skal ikke telle vedtak som ikke har utfall JA`() {
             val tom = LocalDate.of(2024, 1, 31)
             alleUtfall.filter { it != UtfallVedtak.JA }.forEach { utfall ->
-                val vedtakStatus = tilVedtakStatus(
-                    listOf(
-                        vedtak(utfall = utfall, tom = tom),
-                    ),
-                )
+                val vedtakStatus =
+                    tilVedtakStatus(
+                        listOf(
+                            vedtak(utfall = utfall, tom = tom),
+                        ),
+                    )
                 assertThat(vedtakStatus.vedtakTom).isNull()
             }
         }

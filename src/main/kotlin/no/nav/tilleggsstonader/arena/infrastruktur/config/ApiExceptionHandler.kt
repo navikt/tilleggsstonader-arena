@@ -10,15 +10,17 @@ import org.springframework.web.bind.annotation.ResponseStatus
 
 @ControllerAdvice
 class ApiExceptionHandler {
-
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @ExceptionHandler(Throwable::class)
     fun handleThrowable(throwable: Throwable): ProblemDetail {
-        val responseStatus = throwable::class.annotations.find { it is ResponseStatus }
-            ?.let { it as ResponseStatus }
-            ?.value
-            ?: HttpStatus.INTERNAL_SERVER_ERROR
+        val responseStatus =
+            throwable::class
+                .annotations
+                .find { it is ResponseStatus }
+                ?.let { it as ResponseStatus }
+                ?.value
+                ?: HttpStatus.INTERNAL_SERVER_ERROR
         logger.error("Ukjent feil status=${responseStatus.value()}")
         secureLogger.error("Ukjent feil status=${responseStatus.value()}", throwable)
         return ProblemDetail.forStatusAndDetail(responseStatus, "Ukjent feil")

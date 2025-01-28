@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RestController
 class OppgaveController(
     private val oppgaveService: OppgaveService,
 ) {
-
     @PostMapping
-    fun hentOppgaver(@RequestBody request: IdenterRequest): List<ArenaOppgaveDto> {
-        return oppgaveService.hentOppgaver(request.identer)
-    }
+    fun hentOppgaver(
+        @RequestBody request: IdenterRequest,
+    ): List<ArenaOppgaveDto> = oppgaveService.hentOppgaver(request.identer)
 }

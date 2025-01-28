@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RestController
 class VedtakController(
     private val vedtakService: VedtakService,
 ) {
-
     @PostMapping
-    fun hentVedtak(@RequestBody request: IdenterRequest): ArenaSakOgVedtakDto {
-        return SakOgVedtakDtoMapper.map(vedtakService.hentSakOgVedtak(request.identer))
-    }
+    fun hentVedtak(
+        @RequestBody request: IdenterRequest,
+    ): ArenaSakOgVedtakDto = SakOgVedtakDtoMapper.map(vedtakService.hentSakOgVedtak(request.identer))
 }
