@@ -4,11 +4,11 @@ import no.nav.tilleggsstonader.arena.sak.SAK_AKTIVE_STATUSER
 import no.nav.tilleggsstonader.arena.sak.SakRepository
 import no.nav.tilleggsstonader.arena.vedtak.VedtakRepository
 import no.nav.tilleggsstonader.arena.vedtak.VedtakStatusMapper
-import no.nav.tilleggsstonader.arena.vedtak.rettigheter
 import no.nav.tilleggsstonader.kontrakter.arena.ArenaStatusDto
 import no.nav.tilleggsstonader.kontrakter.arena.ArenaStatusHarSakerDto
 import no.nav.tilleggsstonader.kontrakter.arena.SakStatus
 import no.nav.tilleggsstonader.kontrakter.arena.VedtakStatus
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.Rettighet
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterRequest
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterStønadstype
 import org.springframework.stereotype.Service
@@ -28,7 +28,7 @@ class StatusService(
 
     private fun hentVedtakstatus(request: IdenterStønadstype): VedtakStatus =
         vedtakRepository
-            .finnVedtak(request.identer, request.stønadstype.rettigheter())
+            .finnVedtak(request.identer, Rettighet.fraStønadstype(request.stønadstype).map { it.kodeArena })
             .let(VedtakStatusMapper::tilVedtakStatus)
 
     private fun hentSakstatus(request: IdenterStønadstype): SakStatus =

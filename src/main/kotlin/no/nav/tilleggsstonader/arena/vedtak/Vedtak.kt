@@ -4,7 +4,6 @@ import no.nav.tilleggsstonader.kontrakter.arena.vedtak.Rettighet
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.StatusVedtak
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.TypeVedtak
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.UtfallVedtak
-import no.nav.tilleggsstonader.kontrakter.felles.Stønadstype
 import org.springframework.data.relational.core.mapping.Column
 import java.time.LocalDate
 
@@ -45,9 +44,3 @@ data class Vedtak(
 ) {
     fun gjelderUtland() = erUtland == "J"
 }
-
-fun Stønadstype.rettigheter(): List<String> =
-    when (this) {
-        Stønadstype.BARNETILSYN -> setOf(Rettighet.TILSYN_BARN, Rettighet.TILSYN_BARN_ARBEIDSSSØKERE).map { it.kodeArena }
-        Stønadstype.LÆREMIDLER -> setOf(Rettighet.LÆREMIDLER, Rettighet.LÆREMIDLER_ARBEIDSSSØKERE).map { it.kodeArena }
-    }

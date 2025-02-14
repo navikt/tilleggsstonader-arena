@@ -22,7 +22,8 @@ class VedtakRepositoryTest : IntegrationTest() {
         utilRepository.lagSak()
         utilRepository.lagVedtak()
 
-        val vedtak = vedtakRepository.finnVedtak(setOf(FNR), Stønadstype.BARNETILSYN.rettigheter()).single()
+        val rettigheter = Rettighet.fraStønadstype(Stønadstype.BARNETILSYN).map { it.kodeArena }
+        val vedtak = vedtakRepository.finnVedtak(setOf(FNR), rettigheter).single()
 
         assertThat(vedtak.vedtakId).isEqualTo(400)
         assertThat(vedtak.sakId).isEqualTo(100)
