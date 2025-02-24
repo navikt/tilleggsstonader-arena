@@ -1,8 +1,8 @@
 val javaVersion = JavaLanguageVersion.of(21)
-val tilleggsstønaderLibsVersion = "2024.12.11-15.08.d370f00e88e3"
+val tilleggsstønaderLibsVersion = "2025.01.28-10.24.ef3db3fbeef0"
 val tilleggsstønaderKontrakterVersion = "2025.02.19-08.07.9480bf6879c8"
 val familieProsesseringVersion = "2.20231212093500_bfa0e7c"
-val tokenSupportVersion = "5.0.11"
+val tokenSupportVersion = "5.0.17"
 
 group = "no.nav.tilleggsstonader.arena"
 version = "1.0.0"
@@ -10,16 +10,16 @@ version = "1.0.0"
 plugins {
     application
 
-    kotlin("jvm") version "2.0.21"
-    id("com.diffplug.spotless") version "7.0.1"
-    id("com.github.ben-manes.versions") version "0.51.0"
+    kotlin("jvm") version "2.1.10"
+    id("com.diffplug.spotless") version "7.0.2"
+    id("com.github.ben-manes.versions") version "0.52.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
 
-    id("org.springframework.boot") version "3.4.0"
-    id("io.spring.dependency-management") version "1.1.6"
-    kotlin("plugin.spring") version "2.0.21"
+    id("org.springframework.boot") version "3.4.3"
+    id("io.spring.dependency-management") version "1.1.7"
+    kotlin("plugin.spring") version "2.1.10"
 
-    id("org.cyclonedx.bom") version "1.10.0"
+    id("org.cyclonedx.bom") version "2.1.0"
 }
 
 repositories {
@@ -54,7 +54,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("com.oracle.database.jdbc:ojdbc8:23.6.0.24.10")
+    implementation("com.oracle.database.jdbc:ojdbc8:23.7.0.25.01")
 
     // Logging
     implementation("net.logstash.logback:logstash-logback-encoder:8.0")
@@ -70,7 +70,7 @@ dependencies {
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.mockk:mockk:1.13.13")
+    testImplementation("io.mockk:mockk:1.13.16")
 
     testImplementation("org.flywaydb:flyway-core")
     testImplementation("com.h2database:h2")
