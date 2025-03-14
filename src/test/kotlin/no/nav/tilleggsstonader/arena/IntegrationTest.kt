@@ -19,7 +19,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.web.client.RestTemplate
 import java.util.UUID
 
-// Slett denne når RestTemplateConfiguration er tatt i bruk?
 @Configuration
 class DefaultRestTemplateConfiguration {
     @Bean
