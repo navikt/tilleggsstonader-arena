@@ -9,6 +9,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
+import java.time.LocalDate.now
 
 class VedtakStatusMapperTest {
     private val alleUtfall = UtfallVedtak.entries + null
@@ -37,8 +38,8 @@ class VedtakStatusMapperTest {
             val vedtak =
                 vedtak(
                     utfall = UtfallVedtak.JA,
-                    tom = LocalDate.now().plusDays(1),
-                    datoInnstilt = LocalDate.now(),
+                    tom = now().plusDays(1),
+                    datoInnstilt = now(),
                 )
             val vedtakStatus = tilVedtakStatus(listOf(vedtak))
             assertThat(vedtakStatus.harAktivtVedtak).isTrue
@@ -46,23 +47,23 @@ class VedtakStatusMapperTest {
 
         @Test
         fun `vedtak må være innstilte for at man skal ha et aktivt vedtak`() {
-            val vedtak = vedtak(utfall = UtfallVedtak.JA, tom = LocalDate.now().plusDays(1), datoInnstilt = null)
+            val vedtak = vedtak(utfall = UtfallVedtak.JA, tom = now().plusDays(1), datoInnstilt = null)
             val vedtakStatus = tilVedtakStatus(listOf(vedtak))
             assertThat(vedtakStatus.harAktivtVedtak).isFalse()
         }
 
         @Test
         fun `har ikke aktivt vedtak hvis utfall er JA og tom ikke er større enn dagens dato`() {
-            listOf(LocalDate.now().minusDays(1), null).forEach { tom ->
+            listOf(now().minusDays(1), null).forEach { tom ->
                 val vedtakStatus =
-                    tilVedtakStatus(listOf(vedtak(utfall = UtfallVedtak.JA, tom = LocalDate.now().minusDays(1))))
+                    tilVedtakStatus(listOf(vedtak(utfall = UtfallVedtak.JA, tom = now().minusDays(1))))
                 assertThat(vedtakStatus.harAktivtVedtak).isFalse
             }
         }
 
         @Test
         fun `har ikke aktivt vedtak utfall er annet enn JA`() {
-            val datoer = listOf(LocalDate.now().minusDays(1), LocalDate.now().plusDays(1), null)
+            val datoer = listOf(now().minusDays(1), now().plusDays(1), null)
             alleUtfall.filter { it != UtfallVedtak.JA }.forEach { utfall ->
                 datoer.forEach { tom ->
                     val vedtakStatus = tilVedtakStatus(listOf(vedtak(utfall = utfall, tom = tom)))
@@ -81,11 +82,35 @@ class VedtakStatusMapperTest {
         }
 
         @Test
-        fun `false hvis utfall er annet enn null`() {
-            UtfallVedtak.entries.forEach { utfall ->
-                val vedtakStatus = tilVedtakStatus(listOf(vedtak(utfall = utfall)))
-                assertThat(vedtakStatus.harVedtakUtenUtfall).isFalse
-            }
+        fun `true hvis utfall er annet enn AVBRUTT og dato instillt er null`() {
+            UtfallVedtak.entries
+                .filter { it != UtfallVedtak.AVBRUTT }
+                .forEach { utfall ->
+                    val vedtakStatus = tilVedtakStatus(listOf(vedtak(utfall = utfall, datoInnstilt = null)))
+                    assertThat(vedtakStatus.harVedtakUtenUtfall).isTrue
+                }
+        }
+
+        @Test
+        fun `false hvis utfall er annet enn AVBRUTT og dato instillt ikke er null`() {
+            UtfallVedtak.entries
+                .filter { it != UtfallVedtak.AVBRUTT }
+                .forEach { utfall ->
+                    val vedtakStatus = tilVedtakStatus(listOf(vedtak(utfall = utfall, datoInnstilt = now())))
+                    assertThat(vedtakStatus.harVedtakUtenUtfall).isFalse
+                }
+        }
+
+        @Test
+        fun `false hvis utfall er avbrutt og dato instillt er null`() {
+            val vedtakStatus = tilVedtakStatus(listOf(vedtak(utfall = UtfallVedtak.AVBRUTT, datoInnstilt = null)))
+            assertThat(vedtakStatus.harVedtakUtenUtfall).isFalse
+        }
+
+        @Test
+        fun `false hvis utfall er avbrutt og dato instillt ikke er null`() {
+            val vedtakStatus = tilVedtakStatus(listOf(vedtak(utfall = UtfallVedtak.AVBRUTT, datoInnstilt = now())))
+            assertThat(vedtakStatus.harVedtakUtenUtfall).isFalse
         }
     }
 
@@ -97,9 +122,9 @@ class VedtakStatusMapperTest {
             val vedtakStatus =
                 tilVedtakStatus(
                     listOf(
-                        vedtak(utfall = UtfallVedtak.JA, tom = tom, datoInnstilt = LocalDate.now()),
-                        vedtak(utfall = UtfallVedtak.JA, tom = tom.plusDays(1), datoInnstilt = LocalDate.now()),
-                        vedtak(utfall = UtfallVedtak.JA, tom = tom.minusDays(1), datoInnstilt = LocalDate.now()),
+                        vedtak(utfall = UtfallVedtak.JA, tom = tom, datoInnstilt = now()),
+                        vedtak(utfall = UtfallVedtak.JA, tom = tom.plusDays(1), datoInnstilt = now()),
+                        vedtak(utfall = UtfallVedtak.JA, tom = tom.minusDays(1), datoInnstilt = now()),
                     ),
                 )
             assertThat(vedtakStatus.vedtakTom).isEqualTo(tom.plusDays(1))
@@ -132,13 +157,13 @@ class VedtakStatusMapperTest {
         sakId: Int = 1,
         vedtakstatus: StatusVedtak = StatusVedtak.AVSLUTTET,
         vedtaktype: TypeVedtak = TypeVedtak.NY_RETTIGHET,
-        registrertDato: LocalDate = LocalDate.now(),
+        registrertDato: LocalDate = now(),
         registrertAv: String = "Julenissen",
-        modifisertDato: LocalDate = LocalDate.now(),
+        modifisertDato: LocalDate = now(),
         modifisertAv: String = "Julenissen",
         utfall: UtfallVedtak? = null,
         rettighet: Rettighet = Rettighet.TILSYN_BARN,
-        datoMottatt: LocalDate = LocalDate.now(),
+        datoMottatt: LocalDate = now(),
         vedtakIdRelatert: Int? = null,
         personId: Int = 1,
         brukerIdAnsvarlig: String? = null,
