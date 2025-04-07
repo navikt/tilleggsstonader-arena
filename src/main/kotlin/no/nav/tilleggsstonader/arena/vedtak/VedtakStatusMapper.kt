@@ -2,7 +2,7 @@ package no.nav.tilleggsstonader.arena.vedtak
 
 import no.nav.tilleggsstonader.kontrakter.arena.VedtakStatus
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.UtfallVedtak
-import no.nav.tilleggsstonader.libs.utils.osloDateNow
+import java.time.LocalDate
 
 object VedtakStatusMapper {
     fun tilVedtakStatus(alleVedtak: List<Vedtak>): VedtakStatus {
@@ -13,8 +13,8 @@ object VedtakStatusMapper {
         return VedtakStatus(
             harVedtak = alleVedtak.isNotEmpty(),
             harInnvilgetVedtak = innvilgedeVedtak.isNotEmpty(),
-            harAktivtVedtak = innvilgedeVedtak.any { it.tom != null && it.tom > osloDateNow() },
-            harVedtakUtenUtfall = alleVedtak.any { it.utfall == null },
+            harAktivtVedtak = innvilgedeVedtak.any { it.tom != null && it.tom > LocalDate.now() },
+            harVedtakUtenUtfall = alleVedtak.filter { it.utfall != UtfallVedtak.AVBRUTT }.any { it.datoInnstilt == null },
             vedtakTom = innvilgedeVedtak.mapNotNull { it.tom }.maxOrNull(),
         )
     }
