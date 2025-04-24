@@ -75,4 +75,23 @@ class VedtakRepositoryTest : IntegrationTest() {
             assertThat(this.vurdertAv).isEqualTo("Nissen")
         }
     }
+
+    @Test
+    fun `skal finne spesialutbetalinger til vedtak`() {
+        utilRepository.lagSpesialutbetaling()
+
+        val spesialutbetaling = vedtakRepository.finnSpesialutbetalinger(setOf(400))
+        assertThat(spesialutbetaling).hasSize(1)
+
+        with(spesialutbetaling.single()) {
+            assertThat(this.vedtakId).isEqualTo(400)
+            assertThat(this.brukerIdSaksbehandler).isEqualTo("saksbeh")
+            assertThat(this.brukerIdBeslutter).isEqualTo("besl")
+            assertThat(this.datoUtbetaling).isEqualTo(LocalDate.of(2025, 2, 1))
+            assertThat(this.begrunnelse).isEqualTo("Begrunnelse")
+            assertThat(this.belop).isEqualTo(1000)
+            assertThat(this.datoFra).isEqualTo(LocalDate.of(2025, 1, 1))
+            assertThat(this.datoTil).isEqualTo(LocalDate.of(2025, 1, 31))
+        }
+    }
 }

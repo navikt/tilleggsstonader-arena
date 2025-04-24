@@ -9,4 +9,5 @@ data class SakOgVedtak(
     val vedtakfakta: List<Vedtakfakta>,
     val vilkårsvurderinger: List<Vilkårsvurdering>,
     val aktiviteter: List<Aktivitet>,
+    val spesialutbetalinger: List<Spesialutbetaling>,
 )

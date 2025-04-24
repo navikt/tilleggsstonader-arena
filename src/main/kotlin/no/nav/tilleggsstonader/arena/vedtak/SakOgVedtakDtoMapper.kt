@@ -5,6 +5,7 @@ import no.nav.tilleggsstonader.arena.sak.Saksforhold
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.AktivitetDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.ArenaSakOgVedtakDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.SakDto
+import no.nav.tilleggsstonader.kontrakter.arena.vedtak.SpesialutbetalingDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.VedtakDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.VedtakfaktaDto
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.VilkårsvurderingDto
@@ -20,10 +21,11 @@ object SakOgVedtakDtoMapper {
         val aktiviteter = sakOgVedtak.aktiviteter.associateBy { it.aktivitetId }
         val vedtakfakta = sakOgVedtak.vedtakfakta.groupBy { it.vedtakId }
         val vilkårsvurderinger = sakOgVedtak.vilkårsvurderinger.groupBy { it.vedtakId }
+        val spesialutbetalinger = sakOgVedtak.spesialutbetalinger.groupBy { it.vedtakId }
         return ArenaSakOgVedtakDto(
             vedtak =
                 sakOgVedtak.vedtak
-                    .map { mapVedtak(it, vedtakfakta, vilkårsvurderinger) }
+                    .map { mapVedtak(it, vedtakfakta, vilkårsvurderinger, spesialutbetalinger) }
                     .sortedWith(vedtaksortering),
             saker = mapSaker(sakOgVedtak, aktiviteter),
         )
@@ -44,6 +46,7 @@ object SakOgVedtakDtoMapper {
         vedtak: Vedtak,
         vedtakfakta: Map<Int, List<Vedtakfakta>>,
         vilkårsvurderinger: Map<Int, List<Vilkårsvurdering>>,
+        spesialutbetalinger: Map<Int, List<Spesialutbetaling>>,
     ) = VedtakDto(
         sakId = vedtak.sakId,
         type = vedtak.vedtaktype.navn,
@@ -53,10 +56,12 @@ object SakOgVedtakDtoMapper {
         fom = vedtak.fom,
         tom = vedtak.tom,
         totalbeløp = vedtak.totalbeløp,
+        begrunnelse = vedtak.begrunnelse,
         datoInnstillt = vedtak.datoInnstilt,
         utfall = vedtak.utfall?.navn,
         vedtakfakta = mapVedtakFakta(vedtak, vedtakfakta),
         vilkårsvurderinger = mapVilkårsvurderinger(vedtak, vilkårsvurderinger),
+        spesialutbetalinger = mapSpesialutbetalinger(vedtak, spesialutbetalinger),
         datoMottatt = vedtak.datoMottatt,
         saksbehandler = vedtak.brukerIdAnsvarlig,
         beslutter = vedtak.brukerIdBeslutter,
@@ -118,6 +123,28 @@ object SakOgVedtakDtoMapper {
                     gjelderUtdanning = it.gjelderUtdanning,
                     typekode = it.typekode,
                     statuskode = it.statuskode,
+                )
+            }
+
+    private fun mapSpesialutbetalinger(
+        vedtak: Vedtak,
+        spesialutbetalinger: Map<Int, List<Spesialutbetaling>>,
+    ): List<SpesialutbetalingDto> =
+        spesialutbetalinger
+            .getOrDefault(vedtak.vedtakId, emptyList())
+            .map {
+                SpesialutbetalingDto(
+                    spesialutbetalingId = it.spesutbetalingId,
+                    belop = it.belop,
+                    begrunnelse = it.begrunnelse,
+                    saksbehandler = it.brukerIdSaksbehandler,
+                    beslutter = it.brukerIdBeslutter,
+                    datoUtbetaling = it.datoUtbetaling,
+                    fom = it.datoFra,
+                    tom = it.datoTil,
+                    status = it.vedtakstatuskode.navn,
+                    opprettetDato = it.regDato,
+                    endretDato = it.modDato,
                 )
             }
 

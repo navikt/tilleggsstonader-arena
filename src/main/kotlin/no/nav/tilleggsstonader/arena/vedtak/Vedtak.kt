@@ -41,6 +41,7 @@ data class Vedtak(
     val tom: LocalDate?,
     @Column("totalbelop")
     val totalbeløp: Int?,
+    val begrunnelse: String?,
 ) {
     fun gjelderUtland() = erUtland == "J"
 }
