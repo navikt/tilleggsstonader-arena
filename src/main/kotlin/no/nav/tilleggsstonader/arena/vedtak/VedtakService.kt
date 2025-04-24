@@ -24,7 +24,15 @@ class VedtakService(
             vedtakfakta = hentVedtakfakta(vedtakIder),
             vilkårsvurderinger = hentVilkårsvurderinger(vedtakIder),
             aktiviteter = aktiviteter,
+            spesialutbetalinger = hentSpesialutbetalinger(vedtakIder),
         )
+    }
+
+    private fun hentSpesialutbetalinger(vedtakIder: Set<Int>): List<Spesialutbetaling> {
+        if (vedtakIder.isEmpty()) {
+            return emptyList()
+        }
+        return vedtakRepository.finnSpesialutbetalinger(vedtakIder)
     }
 
     private fun hentAktiviteter(saker: List<Sak>): List<Aktivitet> {

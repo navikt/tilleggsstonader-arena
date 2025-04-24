@@ -47,4 +47,25 @@ interface VedtakRepository : CrudRepository<Vedtak, Int> {
     """,
     )
     fun finnVilkårsvurderinger(vedtakIder: Set<Int>): List<Vilkårsvurdering>
+
+    @Query(
+        """
+        SELECT 
+        spesutbetaling_id,
+        vedtak_id, 
+        bruker_id_saksbehandler, 
+        bruker_id_beslutter, 
+        dato_utbetaling, 
+        begrunnelse, 
+        belop, 
+        dato_fra, 
+        dato_til,
+        vedtakstatuskode,
+        reg_dato, 
+        mod_dato
+        FROM spesialutbetaling
+        WHERE vedtak_id IN (:vedtakIds)
+    """,
+    )
+    fun finnSpesialutbetalinger(vedtakIds: Collection<Int>): List<Spesialutbetaling>
 }

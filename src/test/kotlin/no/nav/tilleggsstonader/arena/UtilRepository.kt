@@ -243,6 +243,28 @@ values (:vedtakId,
         )
     }
 
+    fun lagSpesialutbetaling() {
+        jdbcTemplate.update(
+            "INSERT INTO spesialutbetaling (" +
+                "SPESUTBETALING_ID, vedtak_id, bruker_id_saksbehandler, bruker_id_beslutter, dato_utbetaling, " +
+                "begrunnelse, belop, dato_fra, dato_til, vedtakstatuskode, reg_dato, mod_dato) VALUES" +
+                " (:spesialutbetalingId, :vedtakId, 'saksbeh', 'besl', :datoUtbetaling, :begrunnelse, :belop, " +
+                ":datoFra, :datoTil, :vedtakstatuskode, :regDato, :modDato)",
+            mapOf(
+                "spesialutbetalingId" to 401,
+                "vedtakId" to 400,
+                "datoUtbetaling" to "2025-02-01",
+                "begrunnelse" to "Begrunnelse",
+                "belop" to 1000,
+                "datoFra" to "2025-01-01",
+                "datoTil" to "2025-01-31",
+                "vedtakstatuskode" to "IVERK",
+                "regDato" to "2025-02-01",
+                "modDato" to "2025-02-01",
+            ),
+        )
+    }
+
     /**
      * Oppretter en oppgave
      */

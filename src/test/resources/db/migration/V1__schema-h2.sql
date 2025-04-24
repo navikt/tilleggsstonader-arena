@@ -284,16 +284,16 @@ CREATE TABLE vilkaarvurdering
 (
 --    VILKAARVURDERING_ID NUMBER,
 --    VEDTAKTYPEKODE      VARCHAR2(10),
-    VILKAARKODE         VARCHAR2(10),
-    VEDTAK_ID           NUMBER,
+    VILKAARKODE       VARCHAR2(10),
+    VEDTAK_ID         NUMBER,
 --    REG_DATO            DATE,
 --    REG_USER            VARCHAR2(8),
 --    MOD_DATO            DATE,
 --    MOD_USER            VARCHAR2(8),
 --    RETTIGHETKODE       VARCHAR2(10),
 --    AKTFASEKODE         VARCHAR2(10),
-    VILKAARSTATUSKODE   VARCHAR2(1),
-    VURDERT_AV          VARCHAR2(8)
+    VILKAARSTATUSKODE VARCHAR2(1),
+    VURDERT_AV        VARCHAR2(8)
 --    PARTISJON           NUMBER(8),
 --    BEGRUNNELSE         CLOB,
 --    RETUR_JN            VARCHAR2(1),
@@ -328,3 +328,38 @@ CREATE TABLE vilkaartype
     VILKAARREGEL        VARCHAR2(100),
     GRUPPE              VARCHAR2(30)
 );
+
+CREATE TABLE spesialutbetaling
+(
+    --REFERANSE_TOTAL             VARCHAR2(255),
+    DATO_FRA                    DATE,
+    DATO_TIL                    DATE,
+    REG_DATO                    DATE,
+    --REG_USER                    VARCHAR2(8),
+    MOD_DATO                    DATE,
+    --MOD_USER                    VARCHAR2(8),
+    --EKSTERNENHET_ID_ALTMOTTAKER NUMBER,
+    --FERIEGRUNNLAG               NUMBER(12, 2),
+    --FERIEGRUNNLAGKODE           VARCHAR2(10),
+    --ORDINAER_YTELSE             VARCHAR2(1),
+    --REFERANSE_BILAG             VARCHAR2(25),
+    --STATUS_BILAG                VARCHAR2(1),
+    --STATUS_ANVIS_BILAG          VARCHAR2(1),
+    --PARTISJON                   NUMBER(8),
+    --VALGT_UTBET_TYPE            VARCHAR2(20),
+    --KATEGORI                    VARCHAR2(50),
+    SPESUTBETALING_ID           NUMBER,
+    --PERSON_ID                   NUMBER,
+    VEDTAK_ID                   NUMBER,
+    --LOPENR                      NUMBER(3),
+    BRUKER_ID_SAKSBEHANDLER     VARCHAR2(8),
+    BRUKER_ID_BESLUTTER         VARCHAR2(8),
+    DATO_UTBETALING             DATE,
+    BEGRUNNELSE                 VARCHAR2(2000),
+    BELOP                       NUMBER(12, 2),
+    --BELOPKODE                   VARCHAR2(5),
+    --RETTIGHETKODE               VARCHAR2(10),
+    --AKTFASEKODE                 VARCHAR2(10),
+    VEDTAKSTATUSKODE            VARCHAR2(5)
+    --POSTERINGTYPEKODE           VARCHAR2(5),
+)

@@ -173,6 +173,7 @@ class VedtakStatusMapperTest {
         fom: LocalDate? = null,
         tom: LocalDate? = null,
         totalbeløp: Int? = 100,
+        begrunnelse: String? = "begrunnelse",
     ) = Vedtak(
         vedtakId = vedtakId,
         sakId = sakId,
@@ -194,5 +195,6 @@ class VedtakStatusMapperTest {
         fom = fom,
         tom = tom,
         totalbeløp = totalbeløp,
+        begrunnelse = begrunnelse,
     )
 }
