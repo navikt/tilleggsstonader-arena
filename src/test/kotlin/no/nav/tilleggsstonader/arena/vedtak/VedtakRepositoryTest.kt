@@ -27,6 +27,7 @@ class VedtakRepositoryTest : IntegrationTest() {
 
         assertThat(vedtak.vedtakId).isEqualTo(400)
         assertThat(vedtak.sakId).isEqualTo(100)
+        assertThat(vedtak.begrunnelse).isEqualTo("Syntetisert rettighet")
         assertThat(vedtak.vedtakstatus).isEqualTo(StatusVedtak.AVSLUTTET)
         assertThat(vedtak.vedtaktype).isEqualTo(TypeVedtak.NY_RETTIGHET)
         assertThat(vedtak.registrertDato).isEqualTo(LocalDate.of(2016, 1, 12))

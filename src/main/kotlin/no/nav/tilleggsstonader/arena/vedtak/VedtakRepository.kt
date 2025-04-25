@@ -13,7 +13,7 @@ interface VedtakRepository : CrudRepository<Vedtak, Int> {
       v.reg_dato,v.reg_user,v.mod_dato,v.mod_user,v.utfallkode,
       v.rettighetkode,v.dato_mottatt,v.vedtak_id_relatert,v.person_id,
       v.brukerid_beslutter,v.dato_innstilt,v.er_utland,v.fra_dato,v.til_dato, 
-      v.totalbelop 
+      v.totalbelop,v.begrunnelse
     FROM vedtak v
       JOIN person p ON p.person_id = v.person_id
     WHERE p.fodselsnr IN (:identer)
