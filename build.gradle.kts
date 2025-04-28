@@ -1,7 +1,7 @@
 val javaVersion = JavaLanguageVersion.of(21)
-val tilleggsstønaderLibsVersion = "2025.03.28-12.05.78567a42f6ae"
+val tilleggsstønaderLibsVersion = "2025.04.28-12.53.f687c00288d5"
 val tilleggsstønaderKontrakterVersion = "2025.04.24-16.01.939b1e486f49"
-val tokenSupportVersion = "5.0.24"
+val tokenSupportVersion = "5.0.25"
 
 group = "no.nav.tilleggsstonader.arena"
 version = "1.0.0"
@@ -10,11 +10,11 @@ plugins {
     application
 
     kotlin("jvm") version "2.1.20"
-    id("com.diffplug.spotless") version "7.0.2"
+    id("com.diffplug.spotless") version "7.0.3"
     id("com.github.ben-manes.versions") version "0.52.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
 
-    id("org.springframework.boot") version "3.4.4"
+    id("org.springframework.boot") version "3.4.5"
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.spring") version "2.1.20"
 
@@ -69,7 +69,7 @@ dependencies {
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.mockk:mockk:1.13.17")
+    testImplementation("io.mockk:mockk:1.14.0")
 
     testImplementation("org.flywaydb:flyway-core")
     testImplementation("com.h2database:h2")
