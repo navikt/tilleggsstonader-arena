@@ -1,5 +1,6 @@
 package no.nav.tilleggsstonader.arena.status
 
+import no.nav.tilleggsstonader.arena.infrastruktur.config.ApiFeil
 import no.nav.tilleggsstonader.arena.sak.SAK_AKTIVE_STATUSER
 import no.nav.tilleggsstonader.arena.sak.SakRepository
 import no.nav.tilleggsstonader.arena.vedtak.VedtakRepository
@@ -11,6 +12,7 @@ import no.nav.tilleggsstonader.kontrakter.arena.VedtakStatus
 import no.nav.tilleggsstonader.kontrakter.arena.vedtak.Rettighet
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterRequest
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterStønadstype
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 
 @Service
@@ -20,11 +22,19 @@ class StatusService(
 ) {
     fun harSaker(request: IdenterRequest): ArenaStatusHarSakerDto = ArenaStatusHarSakerDto(sakRepository.antallSaker(request.identer) > 0)
 
-    fun hentStatus(request: IdenterStønadstype): ArenaStatusDto =
-        ArenaStatusDto(
+    fun hentStatus(request: IdenterStønadstype): ArenaStatusDto {
+        if (request.identer.isEmpty()) {
+            throw ApiFeil(
+                feil = "Ingen identer i request",
+                httpStatus = HttpStatus.BAD_REQUEST,
+            )
+        }
+
+        return ArenaStatusDto(
             sak = hentSakstatus(request),
             vedtak = hentVedtakstatus(request),
         )
+    }
 
     private fun hentVedtakstatus(request: IdenterStønadstype): VedtakStatus =
         vedtakRepository
