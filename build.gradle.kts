@@ -1,6 +1,6 @@
 val javaVersion = JavaLanguageVersion.of(21)
 val tilleggsstønaderLibsVersion = "2025.04.28-12.53.f687c00288d5"
-val tilleggsstønaderKontrakterVersion = "2025.04.24-16.01.939b1e486f49"
+val tilleggsstønaderKontrakterVersion = "2025.05.02-11.38.ea2beb48a740"
 val tokenSupportVersion = "5.0.25"
 
 group = "no.nav.tilleggsstonader.arena"
@@ -18,7 +18,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.spring") version "2.1.20"
 
-    id("org.cyclonedx.bom") version "2.2.0"
+    id("org.cyclonedx.bom") version "2.3.0"
 }
 
 repositories {
@@ -69,7 +69,7 @@ dependencies {
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.mockk:mockk:1.14.0")
+    testImplementation("io.mockk:mockk:1.14.2")
 
     testImplementation("org.flywaydb:flyway-core")
     testImplementation("com.h2database:h2")
