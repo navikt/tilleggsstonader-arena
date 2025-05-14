@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.convert.converter.Converter
 import org.springframework.data.convert.ReadingConverter
-import org.springframework.data.jdbc.core.convert.JdbcCustomConversions
 import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories
 import org.springframework.jdbc.datasource.DataSourceTransactionManager
@@ -24,16 +23,13 @@ class DatabaseConfiguration : AbstractJdbcConfiguration() {
     @Bean
     fun transactionManager(dataSource: DataSource): PlatformTransactionManager = DataSourceTransactionManager(dataSource)
 
-    @Bean
-    override fun jdbcCustomConversions(): JdbcCustomConversions =
-        JdbcCustomConversions(
-            listOf(
-                StatusSakConverter(),
-                MålgruppeConverter(),
-                StatusVedtakConverter(),
-                TypeVedtakConverter(),
-                RettighetConverter(),
-            ),
+    override fun userConverters(): List<*> =
+        listOf(
+            StatusSakConverter(),
+            MålgruppeConverter(),
+            StatusVedtakConverter(),
+            TypeVedtakConverter(),
+            RettighetConverter(),
         )
 }
 
