@@ -1,7 +1,7 @@
 val javaVersion = JavaLanguageVersion.of(21)
-val tilleggsstønaderLibsVersion = "2025.04.28-12.53.f687c00288d5"
-val tilleggsstønaderKontrakterVersion = "2025.04.24-16.01.939b1e486f49"
-val tokenSupportVersion = "5.0.25"
+val tilleggsstønaderLibsVersion = "2025.05.19-16.10.856a8b28ebfb"
+val tilleggsstønaderKontrakterVersion = "2025.05.19-16.09.454035001955"
+val tokenSupportVersion = "5.0.27"
 
 group = "no.nav.tilleggsstonader.arena"
 version = "1.0.0"
@@ -9,16 +9,16 @@ version = "1.0.0"
 plugins {
     application
 
-    kotlin("jvm") version "2.1.20"
+    kotlin("jvm") version "2.1.21"
     id("com.diffplug.spotless") version "7.0.3"
     id("com.github.ben-manes.versions") version "0.52.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
 
     id("org.springframework.boot") version "3.4.5"
     id("io.spring.dependency-management") version "1.1.7"
-    kotlin("plugin.spring") version "2.1.20"
+    kotlin("plugin.spring") version "2.1.21"
 
-    id("org.cyclonedx.bom") version "2.2.0"
+    id("org.cyclonedx.bom") version "2.3.0"
 }
 
 repositories {
@@ -53,7 +53,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("com.oracle.database.jdbc:ojdbc8:23.7.0.25.01")
+    implementation("com.oracle.database.jdbc:ojdbc8:23.8.0.25.04")
 
     // Logging
     implementation("net.logstash.logback:logstash-logback-encoder:8.1")
@@ -69,7 +69,7 @@ dependencies {
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.mockk:mockk:1.14.0")
+    testImplementation("io.mockk:mockk:1.14.2")
 
     testImplementation("org.flywaydb:flyway-core")
     testImplementation("com.h2database:h2")
