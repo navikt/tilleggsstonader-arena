@@ -1,6 +1,6 @@
 val javaVersion = JavaLanguageVersion.of(21)
 val tilleggsstønaderLibsVersion = "2025.05.19-16.10.856a8b28ebfb"
-val tilleggsstønaderKontrakterVersion = "2025.05.19-16.09.454035001955"
+val tilleggsstønaderKontrakterVersion = "2025.05.26-09.25.f07899b2b19c"
 val tokenSupportVersion = "5.0.27"
 
 group = "no.nav.tilleggsstonader.arena"
@@ -65,7 +65,7 @@ dependencies {
     implementation("no.nav.tilleggsstonader-libs:log:$tilleggsstønaderLibsVersion")
     implementation("no.nav.tilleggsstonader-libs:sikkerhet:$tilleggsstønaderLibsVersion")
 
-    implementation("no.nav.tilleggsstonader.kontrakter:tilleggsstonader-kontrakter:$tilleggsstønaderKontrakterVersion")
+    implementation("no.nav.tilleggsstonader.kontrakter:kontrakter-felles:$tilleggsstønaderKontrakterVersion")
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
