@@ -43,6 +43,10 @@ spec:
       rules:
         - application: tilleggsstonader-sak
           cluster: prod-gcp
+    outbound:
+      rules:
+        - application: logging
+          namespace: nais-system
   azure:
     application:
       enabled: true
