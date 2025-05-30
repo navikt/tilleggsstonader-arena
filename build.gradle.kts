@@ -1,7 +1,6 @@
 val javaVersion = JavaLanguageVersion.of(21)
 val tilleggsstønaderLibsVersion = "2025.05.19-16.10.856a8b28ebfb"
 val tilleggsstønaderKontrakterVersion = "2025.05.26-09.25.f07899b2b19c"
-val tokenSupportVersion = "5.0.27"
 
 group = "no.nav.tilleggsstonader.arena"
 version = "1.0.0"
@@ -9,16 +8,17 @@ version = "1.0.0"
 plugins {
     application
 
-    kotlin("jvm") version "2.1.21"
-    id("com.diffplug.spotless") version "7.0.3"
-    id("com.github.ben-manes.versions") version "0.52.0"
-    id("se.patrikerdes.use-latest-versions") version "0.2.18"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.spring.boot)
 
-    id("org.springframework.boot") version "3.4.5"
-    id("io.spring.dependency-management") version "1.1.7"
-    kotlin("plugin.spring") version "2.1.21"
+    alias(libs.plugins.spring.dependencyManagement)
 
-    id("org.cyclonedx.bom") version "2.3.0"
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.benManes.versions)
+    alias(libs.plugins.useLatestVersions)
+
+    alias(libs.plugins.cyclonedx)
 }
 
 repositories {
@@ -34,7 +34,7 @@ apply(plugin = "com.diffplug.spotless")
 
 spotless {
     kotlin {
-        ktlint("1.5.0")
+        ktlint(libs.versions.ktlint.get())
     }
 }
 
@@ -45,20 +45,13 @@ configurations.all {
 }
 
 dependencies {
-    // Spring
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("com.oracle.database.jdbc:ojdbc8:23.8.0.25.04")
+    implementation(libs.bundles.spring)
+    implementation(libs.bundles.jackson)
+    implementation(libs.bundles.database.oracle)
 
     // Logging
-    implementation("net.logstash.logback:logstash-logback-encoder:8.1")
-
-    implementation("io.micrometer:micrometer-registry-prometheus")
+    implementation(libs.logstash.logback.encoder)
+    implementation(libs.micrometer.prometheus)
 
     // Tillegggsstønader libs
     implementation("no.nav.tilleggsstonader-libs:util:$tilleggsstønaderLibsVersion")
@@ -68,13 +61,9 @@ dependencies {
     implementation("no.nav.tilleggsstonader.kontrakter:kontrakter-felles:$tilleggsstønaderKontrakterVersion")
 
     // Test
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.mockk:mockk:1.14.2")
+    testImplementation(libs.bundles.spring.test)
+    testImplementation(libs.bundles.database.oracle.test)
 
-    testImplementation("org.flywaydb:flyway-core")
-    testImplementation("com.h2database:h2")
-
-    testImplementation("no.nav.security:token-validation-spring-test:$tokenSupportVersion")
     testImplementation("no.nav.tilleggsstonader-libs:test-util:$tilleggsstønaderLibsVersion")
 }
 
