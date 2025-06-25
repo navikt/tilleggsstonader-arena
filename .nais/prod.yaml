@@ -68,3 +68,5 @@ spec:
       value: /var/run/secrets/oracle/creds/username
     - name: DB_PASSWORD_PATH
       value: /var/run/secrets/oracle/creds/password
+    - name: TZ
+      value: Europe/Oslo
