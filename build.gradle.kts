@@ -1,7 +1,7 @@
 val javaVersion = JavaLanguageVersion.of(21)
 val tilleggsstønaderLibsVersion = "2025.06.25-07.59.55db83b77624"
-val tilleggsstønaderKontrakterVersion = "2025.07.10-14.03.c6bf32f4d884"
-val tokenSupportVersion = "5.0.30"
+val tilleggsstønaderKontrakterVersion = "2025.07.29-10.14.653aa5c5bb71"
+val tokenSupportVersion = "5.0.34"
 
 group = "no.nav.tilleggsstonader.arena"
 version = "1.0.0"
@@ -10,11 +10,11 @@ plugins {
     application
 
     kotlin("jvm") version "2.2.0"
-    id("com.diffplug.spotless") version "7.1.0"
+    id("com.diffplug.spotless") version "7.2.1"
     id("com.github.ben-manes.versions") version "0.52.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
 
-    id("org.springframework.boot") version "3.5.3"
+    id("org.springframework.boot") version "3.5.4"
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.spring") version "2.2.0"
 
@@ -53,7 +53,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("com.oracle.database.jdbc:ojdbc8:23.8.0.25.04")
+    implementation("com.oracle.database.jdbc:ojdbc8:23.9.0.25.07")
 
     // Logging
     implementation("net.logstash.logback:logstash-logback-encoder:8.1")
@@ -69,7 +69,7 @@ dependencies {
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.mockk:mockk:1.14.4")
+    testImplementation("io.mockk:mockk:1.14.5")
 
     testImplementation("org.flywaydb:flyway-core")
     testImplementation("com.h2database:h2")
