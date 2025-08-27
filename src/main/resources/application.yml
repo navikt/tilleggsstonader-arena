@@ -34,12 +34,14 @@ spring:
       minimum-idle: 1
 
 management:
-  endpoint.health.show-details: always
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
   endpoints.web:
     exposure.include: info, health, metrics, prometheus
     base-path: "/internal"
-    path-mapping:
-      info: "status/isAlive"
   prometheus.metrics.export.enabled: true
 
 no.nav.security.jwt:
