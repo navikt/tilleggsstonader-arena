@@ -5,6 +5,7 @@ import no.nav.tilleggsstonader.kontrakter.arena.ArenaStatusDto
 import no.nav.tilleggsstonader.kontrakter.arena.ArenaStatusHarSakerDto
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterRequest
 import no.nav.tilleggsstonader.kontrakter.felles.IdenterStønadstype
+import no.nav.tilleggsstonader.kontrakter.felles.IdenterStønadstyper
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,6 +21,11 @@ class StatusController(
     fun hentStatus(
         @RequestBody request: IdenterStønadstype,
     ): ArenaStatusDto = statusService.hentStatus(request)
+
+    @PostMapping("v2")
+    fun hentStatusV2(
+        @RequestBody request: IdenterStønadstyper,
+    ): ArenaStatusDto = statusService.hentStatusV2(request)
 
     @PostMapping("har-saker")
     fun harSaker(

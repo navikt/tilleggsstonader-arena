@@ -37,7 +37,7 @@ class StatusService(
         )
     }
 
-    fun hentStatus(request: IdenterStønadstyper): ArenaStatusDto {
+    fun hentStatusV2(request: IdenterStønadstyper): ArenaStatusDto {
         if (request.identer.isEmpty()) {
             throw ApiFeil(
                 feil = "Ingen identer i request",
