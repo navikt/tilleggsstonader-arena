@@ -1,7 +1,7 @@
 val javaVersion = JavaLanguageVersion.of(21)
-val tilleggsstønaderLibsVersion = "2025.08.08-09.11.14fe5e04d153"
-val tilleggsstønaderKontrakterVersion = "2025.09.09-15.34.74938f5c3fe7"
-val tokenSupportVersion = "5.0.34"
+val tilleggsstønaderLibsVersion = "2025.09.11-09.26.d3123ecc47ce"
+val tilleggsstønaderKontrakterVersion = "2025.09.12-08.29.0d631c2cbe22"
+val tokenSupportVersion = "5.0.36"
 
 group = "no.nav.tilleggsstonader.arena"
 version = "1.0.0"
@@ -9,14 +9,14 @@ version = "1.0.0"
 plugins {
     application
 
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.20"
     id("com.diffplug.spotless") version "7.2.1"
     id("com.github.ben-manes.versions") version "0.52.0"
-    id("se.patrikerdes.use-latest-versions") version "0.2.18"
+    id("se.patrikerdes.use-latest-versions") version "0.2.19"
 
-    id("org.springframework.boot") version "3.5.4"
+    id("org.springframework.boot") version "3.5.5"
     id("io.spring.dependency-management") version "1.1.7"
-    kotlin("plugin.spring") version "2.2.0"
+    kotlin("plugin.spring") version "2.2.20"
 
     id("org.cyclonedx.bom") version "2.3.1"
 }
