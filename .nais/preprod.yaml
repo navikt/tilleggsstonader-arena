@@ -64,7 +64,7 @@ spec:
       value: dev
     - name: DB_URL
       # samme host for main og backup - ønsker liknende setting som i prod for å sjekke at den fungerer som forventet
-      value: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=a01dbfl048.adeo.no)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=a01dbfl048.adeo.no)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=areq02)))
+      value: jdbc:oracle:thin:@(DESCRIPTION=(FAILOVER=on)(LOAD_BALANCE=off)(CONNECT_TIMEOUT=15)(RETRY_COUNT=20)(RETRY_DELAY=3)(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST=a01dbfl048.adeo.no)(PORT = 1521))(ADDRESS = (PROTOCOL = TCP)(HOST=dmv35-scan.adeo.no)(PORT = 1521)))(CONNECT_DATA=(SERVICE_NAME = ccfareq2_ha)))
     - name: DB_USER_PATH
       value: /var/run/secrets/oracle/creds/username
     - name: DB_PASSWORD_PATH
