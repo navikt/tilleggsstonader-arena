@@ -71,3 +71,5 @@ spec:
       value: /var/run/secrets/oracle/creds/password
     - name: TZ
       value: Europe/Oslo
+    - name: JDK_JAVA_OPTIONS
+      value: -XX:MaxRAMPercentage=75
