@@ -1,4 +1,3 @@
 # Ignore everything
 *
-!/.nais/init.sh
 !/build/libs

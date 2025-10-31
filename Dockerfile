@@ -1,9 +1,10 @@
-FROM ghcr.io/navikt/baseimages/temurin:21
+FROM gcr.io/distroless/java21:nonroot
 
 ENV APPLICATION_NAME=tilleggsstonader-arena
 
 EXPOSE 8080
-COPY build/libs/*.jar ./
-COPY /.nais/init.sh /init-scripts/init.sh
+COPY build/libs/app.jar /app.jar
 
 ENV JAVA_OPTS="-XX:MaxRAMPercentage=75"
+
+ENTRYPOINT ["java", "-jar", "/app.jar"]
