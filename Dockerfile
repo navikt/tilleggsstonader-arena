@@ -1,4 +1,4 @@
-FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/jre:openjdk-21@sha256:95d653076cab3207953ff4e6ca1c45b507572593aadb9eebc0b8ccd01e4296e9
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/jre:openjdk-25@sha256:5aad9914e9e0ee259f380c37d3867f8ae87d78d9950e400ba42abf60dde7016e
 
 ENV APPLICATION_NAME=tilleggsstonader-arena
 
