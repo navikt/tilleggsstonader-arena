@@ -1,0 +1,11 @@
+package no.nav.tilleggsstonader.arena.infrastruktur.jackson
+
+import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+
+@Configuration
+class JacksonConfig {
+    @Bean
+    fun jsonMapper() = ObjectMapperProvider.jsonMapper
+}
