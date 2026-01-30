@@ -45,11 +45,11 @@ class SakRepositoryTest : IntegrationTest() {
 
         assertThat(sak.saksforhold).isNotNull()
         assertThat(sak.saksforhold!!.målgruppe).isEqualTo(Målgruppe.NEDSATT_ARBEIDSEVNE)
-        assertThat(sak.saksforhold!!.fom).isEqualTo(LocalDate.of(2021, 2, 25))
-        assertThat(sak.saksforhold!!.tom).isEqualTo(LocalDate.of(2022, 2, 25))
-        assertThat(sak.saksforhold!!.kilde).isEqualTo("BRUKERREGISTRERT")
-        assertThat(sak.saksforhold!!.aktivitetId).isEqualTo(200)
-        assertThat(sak.saksforhold!!.erBrukerregistrert()).isTrue()
+        assertThat(sak.saksforhold.fom).isEqualTo(LocalDate.of(2021, 2, 25))
+        assertThat(sak.saksforhold.tom).isEqualTo(LocalDate.of(2022, 2, 25))
+        assertThat(sak.saksforhold.kilde).isEqualTo("BRUKERREGISTRERT")
+        assertThat(sak.saksforhold.aktivitetId).isEqualTo(200)
+        assertThat(sak.saksforhold.erBrukerregistrert()).isTrue()
     }
 
     @Nested
