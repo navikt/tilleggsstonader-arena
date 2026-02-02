@@ -9,14 +9,14 @@ version = "1.0.0"
 plugins {
     application
 
-    kotlin("jvm") version "2.2.21"
+    kotlin("jvm") version "2.3.0"
     id("com.diffplug.spotless") version "8.0.0"
     id("com.github.ben-manes.versions") version "0.53.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.19"
 
-    id("org.springframework.boot") version "4.0.1"
+    id("org.springframework.boot") version "4.0.2"
     id("io.spring.dependency-management") version "1.1.7"
-    kotlin("plugin.spring") version "2.2.21"
+    kotlin("plugin.spring") version "2.3.0"
 }
 
 repositories {
@@ -67,7 +67,7 @@ dependencies {
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.mockk:mockk:1.14.6")
+    testImplementation("io.mockk:mockk:1.14.9")
 
     testImplementation("org.springframework.boot:spring-boot-starter-flyway")
     testImplementation("org.flywaydb:flyway-core")
@@ -77,8 +77,8 @@ dependencies {
     testImplementation("no.nav.tilleggsstonader-libs:test-util:$tilleggsstønaderLibsVersion")
 
     // Transitiv avhengighet fra mock-oauth2-server -> bcpix. Disse under er definert som dynamisk versjon, noe bygget vårt ikke vil ha noe av
-    testImplementation("org.bouncycastle:bcutil-jdk18on:1.82")
-    testImplementation("org.bouncycastle:bcprov-jdk18on:1.82")
+    testImplementation("org.bouncycastle:bcutil-jdk18on:1.83")
+    testImplementation("org.bouncycastle:bcprov-jdk18on:1.83")
 }
 
 kotlin {
