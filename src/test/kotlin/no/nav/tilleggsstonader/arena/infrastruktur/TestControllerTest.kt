@@ -32,7 +32,7 @@ import java.time.LocalDateTime
 class TestControllerTest : IntegrationTest() {
     val json = """{"tekst":"abc","dato":"2023-01-01","tidspunkt":"2023-01-01T12:00:03"}"""
     val feilJson =
-        """{"type":"about:blank","title":"Internal Server Error","status":500,"detail":"Ukjent feil","instance":"/api/test/error"}"""
+        """{"detail":"Ukjent feil","instance":"/api/test/error","properties":null,"status":500,"title":"Internal Server Error","type":null}"""
 
     @Test
     fun `skal kunne hente json fra endepunkt`() {

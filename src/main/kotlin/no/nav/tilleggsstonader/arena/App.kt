@@ -1,8 +1,8 @@
 package no.nav.tilleggsstonader.arena
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
 import org.springframework.boot.runApplication
+import org.springframework.boot.webmvc.autoconfigure.error.ErrorMvcAutoConfiguration
 import java.nio.file.Files
 import kotlin.io.path.Path
 

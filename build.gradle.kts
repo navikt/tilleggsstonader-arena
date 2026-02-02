@@ -1,7 +1,7 @@
 val javaVersion = JavaLanguageVersion.of(21)
-val tilleggsstønaderLibsVersion = "2025.10.14-11.02.0ba3aa7f0dc3"
-val tilleggsstønaderKontrakterVersion = "2025.10.30-12.57.e4c90cc6948f"
-val tokenSupportVersion = "5.0.39"
+val tilleggsstønaderLibsVersion = "2026.02.02-12.36.8345e89eeee3"
+val tilleggsstønaderKontrakterVersion = "2026.02.02-12.31.36d4a490969b"
+val tokenSupportVersion = "6.0.1"
 
 group = "no.nav.tilleggsstonader.arena"
 version = "1.0.0"
@@ -14,7 +14,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.53.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.19"
 
-    id("org.springframework.boot") version "3.5.7"
+    id("org.springframework.boot") version "4.0.1"
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.spring") version "2.2.21"
 }
@@ -47,7 +47,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("tools.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
@@ -69,6 +69,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.mockk:mockk:1.14.6")
 
+    testImplementation("org.springframework.boot:spring-boot-starter-flyway")
     testImplementation("org.flywaydb:flyway-core")
     testImplementation("com.h2database:h2")
 
