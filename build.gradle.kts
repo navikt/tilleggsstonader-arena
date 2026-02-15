@@ -51,7 +51,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("com.oracle.database.jdbc:ojdbc8:23.26.0.0.0")
+    implementation("com.oracle.database.jdbc:ojdbc8:23.26.1.0.0")
 
     // Logging
     implementation("net.logstash.logback:logstash-logback-encoder:9.0")
