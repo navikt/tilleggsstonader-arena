@@ -290,4 +290,27 @@ values (:vedtakId,
             ),
         )
     }
+
+    fun opprettTaskInstanceTA(kommentar: String? = "kommentar TA") {
+        val mainProcessId = 789
+        jdbcTemplate.update(
+            """            
+                INSERT INTO taskinstance (ID,DESCRIPTION,NOTE,DUEDATE,MAINPROCESS_ID,CASECONTEXT,USERNAME,REG_DATO) VALUES 
+            (500,
+            'tittel TA',
+            :kommentar,
+            to_date('21.03.2025','DD.MM.RRRR'),
+            :mainProcessId,
+            'TA:' || :fnr,
+            '5562',
+            to_date('20.03.2024T15:01','DD.MM.RRRRTHH24:MI')
+            );
+        """,
+            mapOf(
+                "fnr" to TestConstants.FNR,
+                "mainProcessId" to mainProcessId,
+                "kommentar" to kommentar,
+            ),
+        )
+    }
 }
