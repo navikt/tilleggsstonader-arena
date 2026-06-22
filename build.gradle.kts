@@ -1,7 +1,7 @@
 val javaVersion = JavaLanguageVersion.of(21)
 val tilleggsstønaderLibsVersion = "2026.02.02-12.36.8345e89eeee3"
 val tilleggsstønaderKontrakterVersion = "2026.06.03-15.20.ced35659c426"
-val tokenSupportVersion = "6.0.8"
+val tokenSupportVersion = "6.0.10"
 val tomcatVersion = "11.0.22"
 
 group = "no.nav.tilleggsstonader.arena"
@@ -15,7 +15,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.54.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.19"
 
-    id("org.springframework.boot") version "4.0.6"
+    id("org.springframework.boot") version "4.1.0"
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.spring") version "2.2.21"
 }
