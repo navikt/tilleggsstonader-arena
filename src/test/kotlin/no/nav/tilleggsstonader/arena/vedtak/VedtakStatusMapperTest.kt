@@ -162,7 +162,7 @@ class VedtakStatusMapperTest {
         modifisertDato: LocalDate = now(),
         modifisertAv: String = "Julenissen",
         utfall: UtfallVedtak? = null,
-        rettighet: Rettighet = Rettighet.TILSYN_BARN,
+        rettighet: Rettighet = Rettighet.PASS_AV_BARN,
         datoMottatt: LocalDate = now(),
         vedtakIdRelatert: Int? = null,
         personId: Int = 1,

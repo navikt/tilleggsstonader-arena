@@ -35,7 +35,7 @@ class VedtakRepositoryTest : IntegrationTest() {
         assertThat(vedtak.modifisertDato).isEqualTo(LocalDate.of(2022, 2, 20))
         assertThat(vedtak.modifisertAv).isEqualTo("GRENSESN")
         assertThat(vedtak.utfall).isEqualTo(UtfallVedtak.JA)
-        assertThat(vedtak.rettighet).isEqualTo(Rettighet.TILSYN_BARN)
+        assertThat(vedtak.rettighet).isEqualTo(Rettighet.PASS_AV_BARN)
         assertThat(vedtak.datoMottatt).isEqualTo(LocalDate.of(2016, 1, 14))
         assertThat(vedtak.vedtakIdRelatert).isNull()
         assertThat(vedtak.personId).isEqualTo(1)
